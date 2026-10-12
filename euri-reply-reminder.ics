@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Libres family//Euri invite//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:euri-quinn-reply-reminder-20261018@islawqt.github.io
+DTSTAMP:20261012T000000Z
+DTSTART:20261018T010000Z
+DTEND:20261018T011500Z
+SUMMARY:Reply to Euri Quinn's birthday invite
+DESCRIPTION:Last day to reply (until 11:59 PM tonight). Tap to answer: http
+ s://islawqt.github.io/euri/#rsvp
+URL:https://islawqt.github.io/euri/#rsvp
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:PT0M
+DESCRIPTION:Last day to reply to Euri Quinn's birthday invite
+END:VALARM
+END:VEVENT
+END:VCALENDAR

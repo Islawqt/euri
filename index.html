@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Euri Quinn Turns One</title>
+<meta name="description" content="You're invited to Euri Quinn's 1st birthday. Wednesday, October 21, 12 PM at RR Family Spring Resort, Maramag.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://islawqt.github.io/euri/">
+<meta property="og:title" content="Euri Quinn is turning one!">
+<meta property="og:description" content="Wed, Oct 21 · 12 PM · RR Family Spring Resort, Maramag. Tap for details and RSVP.">
+<meta property="og:image" content="https://islawqt.github.io/euri/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#2A1B14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='18' cy='18' r='12' fill='%23A8714A'/%3E%3Ccircle cx='46' cy='18' r='12' fill='%23A8714A'/%3E%3Ccircle cx='32' cy='36' r='24' fill='%23A8714A'/%3E%3Ctext x='32' y='47' font-size='30' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23FFF8EE'%3E1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Teddy-bear scrapbook: dark chocolate page, cream stitched panels, honey highlights.
+   Four sections shown one at a time, like a form: Back / Next (or swipe, or the arrow keys).
+   A section taller than the phone simply scrolls, so nothing is ever cut off. */
+:root {
+  --choc: #2A1B14;
+  --choc-2: #3A271D;
+  --cream: #FFF6E9;
+  --card: #FFFDF8;
+  --tan: #F6E3C6;
+  --cocoa: #4A2F22;
+  --brown: #7A4E33;
+  --honey: #E0A042;
+  --honey-dark: #B97A24;
+  --on-honey: #3A2418;
+  --stitch: #D8BC9C;
+  --line: #E3CDB0;
+  --muted: #5C4334;
+  --on-choc: #F3E4D0;
+  --on-choc-muted: #D2BCA6;
+  --ok: #3F6B3A;
+  --ok-bg: #EEF4E6;
+  --err: #A8432A;
+  --font-display: "Fredoka", "Baloo 2", system-ui, sans-serif;
+  --font-body: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--choc); color: var(--on-choc);
+  font-family: var(--font-body); font-size: 1rem; line-height: 1.5;
+}
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--honey) !important; outline-offset: 2px !important; }
+
+/* Shell: language bar on top, one section in the middle, Back / Next at the bottom. */
+.shell {
+  min-height: 100vh; min-height: 100svh; max-width: 28rem; margin-inline: auto;
+  padding: max(14px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
+  display: flex; flex-direction: column; gap: 1rem;
+}
+.screen { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.25rem; padding: .25rem 0; }
+.screen.from-right { animation: inR .3s ease-out; }
+.screen.from-left { animation: inL .3s ease-out; }
+@keyframes inR { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: none; } }
+@keyframes inL { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: none; } }
+.screen-title { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; margin: 0; text-align: center; color: var(--cream); }
+.stitched { outline: 2px dashed var(--stitch); outline-offset: -9px; }
+[tabindex="-1"]:focus { outline: none !important; }
+
+/* Pager */
+.pager { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: .7rem .6rem; padding-top: .25rem; }
+.pager .dots { grid-row: 1; grid-column: 1 / -1; justify-self: center; }
+.pager .back { grid-row: 2; grid-column: 1; }
+.pager .fwd { grid-row: 2; grid-column: 2; }
+.pg-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 52px; padding: 0 1.15rem;
+  border-radius: 999px; font: 800 1rem var(--font-body); cursor: pointer;
+}
+.pg-btn.back { justify-self: start; background: transparent; color: var(--on-choc); border: 2px solid rgba(243, 228, 208, .4); }
+.pg-btn.fwd { justify-self: end; background: var(--honey); color: var(--on-honey); border: 0; box-shadow: 0 4px 0 var(--honey-dark); }
+.pg-btn.invisible { visibility: hidden; }
+.pg-btn.fwd.nudge svg { animation: nudge 1.4s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+.dots { display: flex; gap: .4rem; align-items: center; }
+.dots span { width: 8px; height: 8px; border-radius: 999px; background: rgba(243, 228, 208, .28); transition: width .2s, background-color .2s; }
+.dots span.past { background: var(--on-choc-muted); }
+.dots span.on { width: 24px; background: var(--honey); }
+
+/* Screen 1: hero */
+.langs { display: flex; justify-content: center; gap: .35rem; }
+.langs button {
+  min-height: 44px; padding: 0 .95rem; border-radius: 999px; border: 2px solid rgba(243, 228, 208, .35);
+  background: transparent; color: var(--on-choc); font: 700 .9rem var(--font-body); cursor: pointer;
+}
+.langs button[aria-pressed="true"] { background: var(--cream); border-color: var(--cream); color: var(--cocoa); }
+.hero { text-align: center; display: grid; gap: .6rem; justify-items: center; }
+.eyebrow {
+  font-family: var(--font-display); font-weight: 600; font-size: .9rem; letter-spacing: .08em; text-transform: uppercase;
+  padding: .45rem 1.1rem; border-radius: 999px; background: var(--cream); color: var(--brown);
+  outline: 2px dashed var(--stitch); outline-offset: -5px;
+}
+.art {
+  position: relative; width: min(100%, 21rem); border-radius: 30px; overflow: hidden; background: #F3E7D3;
+  box-shadow: 0 0 0 6px var(--cream), 0 14px 30px rgba(0, 0, 0, .35); margin: .5rem 0 .4rem;
+}
+.art video { width: 100%; height: auto; aspect-ratio: 960 / 992; display: block; object-fit: cover; }
+.art video.over { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .15s; }
+.art.playing video.over { opacity: 1; }
+.art .tap {
+  position: absolute; inset: 0; width: 100%; border: 0; padding: 0 0 14px; margin: 0; background: transparent; cursor: pointer;
+  display: flex; align-items: flex-end; justify-content: center; border-radius: 30px;
+}
+.art .hint {
+  display: inline-flex; align-items: center; gap: .45rem; min-height: 40px; padding: .35rem .95rem;
+  border-radius: 999px; background: var(--cocoa); color: var(--cream); font: 800 .9rem var(--font-body);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .25); transition: opacity .2s;
+}
+.art.playing .hint { opacity: 0; }
+h1 { font-family: var(--font-display); font-weight: 700; margin: 0; justify-self: stretch; font-size: clamp(1.45rem, 7vw, 2.2rem); line-height: 1.12; color: var(--cream); }
+h1 .name { display: block; white-space: nowrap; }
+h1 .one { display: flex; align-items: center; justify-content: center; gap: .6rem; color: var(--honey); font-weight: 600; font-size: .66em; margin-top: .3rem; }
+h1 .one::before, h1 .one::after { content: ""; width: 2rem; border-top: 2px dashed rgba(224, 160, 66, .7); }
+.hero-copy { margin: .25rem 0 0; max-width: 22rem; color: var(--on-choc); font-size: 1.05rem; font-weight: 600; }
+
+/* Cards */
+.card { background: var(--card); color: var(--cocoa); border-radius: 26px; padding: 1.6rem 1.35rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+.rows { margin: 0; display: grid; gap: 1.1rem; }
+.row { display: flex; gap: .9rem; align-items: flex-start; }
+.ico { flex: none; width: 44px; height: 44px; border-radius: 14px; background: var(--tan); color: var(--brown); display: grid; place-items: center; }
+.row dt { font-size: .8rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.row dd { margin: 0; font-weight: 800; font-size: 1.08rem; line-height: 1.35; }
+.row dd small { display: block; font-weight: 400; font-size: .98rem; color: var(--muted); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font: 800 1rem var(--font-body); border-radius: 16px; padding: .7rem 1.1rem; min-height: 52px;
+  border: 0; text-decoration: none; cursor: pointer;
+}
+.btn.dark { background: var(--cocoa); color: var(--cream); }
+.btn.honey { background: var(--honey); color: var(--on-honey); box-shadow: 0 5px 0 var(--honey-dark); font-size: 1.05rem; min-height: 56px; }
+.btn.ghost { background: transparent; color: var(--on-choc); border: 2px solid rgba(243, 228, 208, .4); }
+.btn[disabled] { opacity: .6; cursor: wait; }
+
+/* Screen 3: fee + countdown */
+.fee { background: var(--tan); color: var(--cocoa); border-radius: 26px; padding: 1.35rem; display: grid; gap: 1rem; }
+.fee-top { display: flex; gap: 1rem; align-items: center; }
+.badge {
+  flex: none; width: 88px; height: 88px; border-radius: 50%; background: var(--honey); color: var(--on-honey);
+  display: grid; place-content: center; text-align: center; outline: 2px dashed var(--cream); outline-offset: -6px;
+}
+.badge b { font-family: var(--font-display); font-size: 1.6rem; line-height: 1; }
+.badge span { font-size: .7rem; font-weight: 800; }
+.fee h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; margin: 0; }
+.fee p { margin: 0; }
+.fee .sub { color: var(--muted); font-size: .98rem; }
+.fee-note { background: var(--card); border-radius: 18px; padding: .9rem 1rem; font-size: .98rem; line-height: 1.5; }
+.fee-note b { color: var(--brown); }
+.count { text-align: center; display: grid; gap: .6rem; }
+.count h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; margin: 0; color: var(--cream); }
+.ticks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; }
+.tick { background: var(--cream); color: var(--cocoa); border-radius: 20px; padding: .85rem .25rem; outline: 2px dashed var(--stitch); outline-offset: -6px; }
+.tick b { display: block; font-family: var(--font-display); font-weight: 700; font-size: 2.1rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.tick span { display: block; margin-top: .3rem; font-size: .82rem; font-weight: 700; color: var(--muted); }
+.count p { margin: 0; color: var(--on-choc-muted); }
+
+/* Screen 4: RSVP */
+.rsvp > header { text-align: center; display: grid; gap: .25rem; }
+.rsvp h2 { font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; margin: 0; }
+.rsvp .lead { margin: 0; color: var(--muted); }
+form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+.field { display: grid; gap: .4rem; }
+.field label, .field legend { font-weight: 800; font-size: .98rem; padding: 0; }
+.field label small { font-weight: 600; color: var(--muted); }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+input[type="text"], input[type="number"], textarea {
+  font: 600 1.05rem var(--font-body); color: var(--cocoa); background: var(--cream);
+  border: 2px solid var(--line); border-radius: 14px; padding: .75rem .9rem; width: 100%; min-height: 50px;
+}
+textarea { resize: vertical; min-height: 84px; line-height: 1.4; }
+::placeholder { color: #8C7465; opacity: 1; }
+.choices { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; inset: 0; margin: 0; }
+.choice span {
+  display: flex; align-items: center; gap: .75rem; min-height: 54px; padding: .55rem 1rem;
+  border: 2px solid var(--line); border-radius: 16px; font-weight: 800; cursor: pointer; background: var(--cream);
+}
+.choice span::before {
+  content: ""; flex: none; width: 20px; height: 20px; box-sizing: border-box; border-radius: 50%;
+  border: 2px solid var(--stitch); background: var(--card);
+}
+.choice input:checked + span { background: var(--cocoa); border-color: var(--cocoa); color: var(--cream); }
+.choice input:checked + span::before { border: 6px solid var(--honey); background: var(--cream); }
+.choice input:focus-visible + span { outline: 3px solid var(--honey); outline-offset: 2px; }
+/* Head-count: the label sits on its own line like every other field, the stepper takes the full width under it */
+.stepper {
+  display: grid; grid-template-columns: 52px minmax(0, 1fr) 52px; align-items: center; gap: .4rem;
+  background: var(--cream); border: 2px solid var(--line); border-radius: 16px; padding: .3rem;
+}
+.step {
+  width: 52px; height: 46px; border-radius: 12px; border: 2px solid var(--line);
+  background: var(--card); color: var(--cocoa); font: 700 1.5rem/1 var(--font-display); cursor: pointer;
+}
+#guestCount {
+  width: 100%; min-height: 46px; padding: 0; border: 0; background: transparent; text-align: center;
+  font: 700 1.5rem var(--font-display); -moz-appearance: textfield; appearance: textfield;
+}
+#guestCount::-webkit-inner-spin-button, #guestCount::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.group-fee { margin: 0; font-size: .95rem; font-weight: 700; color: var(--brown); text-align: center; font-variant-numeric: tabular-nums; }
+.status { min-height: 1.2em; margin: 0; font-weight: 700; color: var(--brown); text-align: center; }
+.status.err { color: var(--err); }
+.done { background: var(--ok-bg); color: var(--ok); border-radius: 18px; padding: 1rem 1.1rem; display: grid; gap: .4rem; }
+.done p { margin: 0; }
+.done b { font-family: var(--font-display); font-size: 1.2rem; }
+.cal { display: grid; gap: .5rem; margin-top: .3rem; padding-top: .8rem; border-top: 2px dashed rgba(63, 107, 58, .3); }
+.cal p { margin: 0; font-weight: 800; }
+.cal small { font-size: .88rem; font-weight: 600; line-height: 1.4; }
+.cal-btns { display: grid; grid-template-columns: minmax(0, 1fr); gap: .5rem; }
+.cal-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem; min-height: 48px; padding: .4rem .6rem;
+  border-radius: 14px; background: var(--card); color: var(--cocoa); border: 2px solid rgba(63, 107, 58, .35);
+  font-weight: 800; font-size: .92rem; line-height: 1.2; text-align: center; text-decoration: none;
+}
+.link-btn { justify-self: start; min-height: 44px; background: none; border: 0; padding: 0; color: inherit; font: 800 .98rem var(--font-body); text-decoration: underline; cursor: pointer; }
+.contact { display: grid; gap: .7rem; }
+.contact > p { margin: 0; color: var(--on-choc-muted); font-weight: 700; text-align: center; }
+.person { display: grid; gap: .55rem; padding: .85rem .9rem; border-radius: 18px; border: 2px dashed rgba(216, 188, 156, .35); }
+.person .couple { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; color: var(--cream); text-align: center; }
+.actions .btn[aria-expanded="true"] { background: var(--cream); color: var(--cocoa); border-color: var(--cream); }
+.pick { display: grid; gap: .5rem; }
+.pick p { margin: 0; color: var(--on-choc-muted); font-weight: 700; font-size: .92rem; }
+.pick-btn {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem; flex-wrap: wrap; min-height: 52px; padding: .5rem 1rem;
+  border-radius: 14px; background: var(--honey); color: var(--on-honey); text-decoration: none; box-shadow: 0 3px 0 var(--honey-dark);
+}
+.pick-btn span { font-weight: 700; font-variant-numeric: tabular-nums; }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; }
+.cal.in-card { margin-top: 0; padding-top: .9rem; border-top-color: var(--line); }
+.cal.in-card p { font-size: .92rem; color: var(--muted); }
+.cal.in-card .cal-btn { border-color: var(--line); }
+footer { text-align: center; display: grid; justify-items: center; gap: .15rem; padding-top: .25rem; color: var(--on-choc-muted); }
+footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; color: var(--cream); }
+
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (max-height: 700px) {
+  .art { width: min(100%, 15.5rem); }
+  .hero { gap: .45rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .screen.from-right, .screen.from-left, .pg-btn.fwd.nudge svg { animation: none; }
+  .dots span, .art .hint, .art video.over { transition: none; }
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="langs" role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="ceb" aria-pressed="false">Bisaya</button>
+    <button type="button" data-lang="tl" aria-pressed="false">Tagalog</button>
+  </div>
+
+  <!-- Section 1: hero -->
+  <section class="screen" id="s-top" aria-labelledby="heroTitle">
+    <header class="hero">
+      <span class="eyebrow" data-t="eyebrow">You're invited</span>
+      <div class="art" id="art">
+        <video id="idle" autoplay muted loop playsinline preload="auto" poster="euri-still.jpg" width="960" height="992" aria-hidden="true">
+          <source src="euri-idle.mp4" type='video/mp4; codecs="avc1.640020"'>
+          <source src="euri-idle.webm" type='video/webm; codecs="vp9"'>
+        </video>
+        <video id="waah" class="over" playsinline preload="auto" width="960" height="992" aria-hidden="true">
+          <source src="euri-waah.mp4" type='video/mp4; codecs="avc1.640020, mp4a.40.2"'>
+          <source src="euri-waah.webm" type='video/webm; codecs="vp9, opus"'>
+        </video>
+        <button type="button" class="tap" id="tap" aria-label="Play Euri saying Waaah, with sound">
+          <span class="hint">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+            <span data-t="tapHint">Tap Euri to hear him</span>
+          </span>
+        </button>
+      </div>
+      <h1 id="heroTitle" tabindex="-1"><span class="name" id="fullName">Euri Quinn Libres Siapoc</span><span class="one" data-t="first">First Birthday</span></h1>
+      <p class="hero-copy" data-t="heroCopy">We would be delighted to hear your response. Please proceed for more details.</p>
+    </header>
+  </section>
+
+  <!-- Section 2: event details -->
+  <section class="screen" id="s-details" aria-labelledby="detailsTitle" hidden>
+    <h2 class="screen-title" id="detailsTitle" tabindex="-1" data-t="detailsTitle">Party details</h2>
+    <div class="card stitched">
+      <dl class="rows">
+        <div class="row">
+          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></span>
+          <div><dt data-t="when">When</dt><dd><span data-t="date">Wednesday, October 21, 2026</span><small data-t="time">Starts at 12:00 noon (Philippine time)</small></dd></div>
+        </div>
+        <div class="row">
+          <span class="ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+          <div><dt data-t="where">Where</dt><dd>RR Family Spring Resort<small>Purok 3, Tubigon, Maramag, Bukidnon 8714</small></dd></div>
+        </div>
+        <div class="row">
+          <span class="ico" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="13.5" r="7.5"/><circle cx="12" cy="16" r="2"/></svg></span>
+          <div><dt data-t="theme">Theme</dt><dd data-t="teddy">Teddy bears</dd></div>
+        </div>
+      </dl>
+      <a class="btn dark" href="https://maps.app.goo.gl/kDxDsRqXwA4XVtbm7" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14"/></svg>
+        <span data-t="map">Show in Google Maps</span>
+      </a>
+      <div class="cal in-card">
+        <p data-t="calTitle">Add it to your calendar</p>
+        <div class="cal-btns"><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Euri+Quinn%27s+1st+Birthday&amp;dates=20261021T040000Z%2F20261021T080000Z&amp;details=Teddy+bear+theme.+Resort+entrance+fee%3A+PHP+100+per+person+%28kids+2+ft+and+below+free%29%2C+please+bring+your+own.+Map%3A+https%3A%2F%2Fmaps.app.goo.gl%2FkDxDsRqXwA4XVtbm7+Invite%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F&amp;location=RR+Family+Spring+Resort%2C+Purok+3%2C+Tubigon%2C+Maramag%2C+Bukidnon+8714" data-gcal="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Euri+Quinn%27s+1st+Birthday&amp;dates=20261021T040000Z%2F20261021T080000Z&amp;details=Teddy+bear+theme.+Resort+entrance+fee%3A+PHP+100+per+person+%28kids+2+ft+and+below+free%29%2C+please+bring+your+own.+Map%3A+https%3A%2F%2Fmaps.app.goo.gl%2FkDxDsRqXwA4XVtbm7+Invite%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F&amp;location=RR+Family+Spring+Resort%2C+Purok+3%2C+Tubigon%2C+Maramag%2C+Bukidnon+8714" data-ics="euri-birthday.ics" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M12 13v5M9.5 15.5h5"/></svg><span data-t="calAdd">Add to my calendar</span></a></div><small class="cal-hint" hidden data-t="calHint">If nothing opens, tap the ⋮ or share menu and choose “Open in browser”.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: entrance fee + countdown -->
+  <section class="screen" id="s-fee" aria-labelledby="feeTitle" hidden>
+    <div class="fee">
+      <div class="fee-top">
+        <div class="badge"><b>₱100</b><span data-t="perPerson">per person</span></div>
+        <div>
+          <h2 id="feeTitle" tabindex="-1" data-t="feeTitle">Resort entrance fee</h2>
+          <p class="sub" data-t="feeSub">Regular pool access. Kids 2 ft tall and below get in free.</p>
+        </div>
+      </div>
+      <p class="fee-note" data-t="feeNote" data-html>Please <b>cover your own entrance fee</b>. We can only take care of the food and the event hall. Sorry in advance, and thank you so much for understanding.</p>
+    </div>
+    <div class="count" aria-live="polite">
+      <h2 id="countTitle" data-t="countTitle">Party starts in</h2>
+      <div class="ticks" id="ticks">
+        <div class="tick"><b id="d">–</b><span data-t="days">days</span></div>
+        <div class="tick"><b id="h">–</b><span data-t="hours">hours</span></div>
+        <div class="tick"><b id="m">–</b><span data-t="mins">minutes</span></div>
+      </div>
+      <p id="countNote" data-t="countNote">Oct 21 · 12 noon, Philippine time</p>
+    </div>
+  </section>
+
+  <!-- Section 4: RSVP + contact -->
+  <section class="screen" id="s-rsvp" aria-labelledby="rsvpTitle" hidden>
+    <div class="card stitched rsvp">
+      <header>
+        <h2 id="rsvpTitle" tabindex="-1" data-t="rsvpTitle">Can you come?</h2>
+        <p class="lead" id="rsvpLead" data-t="lead" data-html>Please reply by <b>Sunday, October 18</b> so we can plan food and seats.</p>
+      </header>
+
+      <form id="rsvpForm" novalidate>
+        <div class="field">
+          <label for="guestName" data-t="nameLabel">Your name</label>
+          <input id="guestName" name="name" type="text" autocomplete="name" maxlength="60" placeholder="e.g. Tita Rika" data-ph="namePh">
+        </div>
+
+        <fieldset class="field">
+          <legend data-t="goLegend">Can you go?</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="status" id="goingYes" value="going" checked><span data-t="yes">Yes, I can go</span></label>
+            <label class="choice" id="maybeChoice" hidden><input type="radio" name="status" id="goingMaybe" value="maybe"><span data-t="maybe">I'll try</span></label>
+            <label class="choice"><input type="radio" name="status" id="goingNo" value="not_going"><span data-t="no">Sorry, I can't</span></label>
+          </div>
+        </fieldset>
+
+        <div class="field" id="countField">
+          <label for="guestCount" data-t="howMany">How many of you, including you?</label>
+          <div class="stepper">
+            <button type="button" class="step" id="minus" aria-label="One less person">−</button>
+            <input id="guestCount" name="count" type="number" min="1" max="20" value="1" inputmode="numeric">
+            <button type="button" class="step" id="plus" aria-label="One more person">+</button>
+          </div>
+          <p class="group-fee" id="groupFee"></p>
+        </div>
+
+        <div class="field" id="noteField" hidden>
+          <label for="guestNote"><span data-t="noteLabel">Leave a short note</span> <small data-t="optional">(optional)</small></label>
+          <textarea id="guestNote" name="note" maxlength="200" rows="3" placeholder="e.g. Happy birthday, Euri!" data-ph="notePh"></textarea>
+        </div>
+
+        <button class="btn honey" type="submit" id="sendBtn" data-t="send">Send my reply</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+
+      <div class="done" id="done" hidden>
+        <p><b id="doneTitle"></b></p>
+        <p id="doneText"></p>
+        <div class="cal" id="calGoing" hidden>
+          <p data-t="calTitle">Add it to your calendar</p>
+          <div class="cal-btns"><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Euri+Quinn%27s+1st+Birthday&amp;dates=20261021T040000Z%2F20261021T080000Z&amp;details=Teddy+bear+theme.+Resort+entrance+fee%3A+PHP+100+per+person+%28kids+2+ft+and+below+free%29%2C+please+bring+your+own.+Map%3A+https%3A%2F%2Fmaps.app.goo.gl%2FkDxDsRqXwA4XVtbm7+Invite%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F&amp;location=RR+Family+Spring+Resort%2C+Purok+3%2C+Tubigon%2C+Maramag%2C+Bukidnon+8714" data-gcal="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Euri+Quinn%27s+1st+Birthday&amp;dates=20261021T040000Z%2F20261021T080000Z&amp;details=Teddy+bear+theme.+Resort+entrance+fee%3A+PHP+100+per+person+%28kids+2+ft+and+below+free%29%2C+please+bring+your+own.+Map%3A+https%3A%2F%2Fmaps.app.goo.gl%2FkDxDsRqXwA4XVtbm7+Invite%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F&amp;location=RR+Family+Spring+Resort%2C+Purok+3%2C+Tubigon%2C+Maramag%2C+Bukidnon+8714" data-ics="euri-birthday.ics" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M12 13v5M9.5 15.5h5"/></svg><span data-t="calAdd">Add to my calendar</span></a></div><small class="cal-hint" hidden data-t="calHint">If nothing opens, tap the ⋮ or share menu and choose “Open in browser”.</small>
+          <small data-t="calNote">Set a reminder for the day before. Your phone asks before adding it.</small>
+        </div>
+        <div class="cal" id="calMaybe" hidden>
+          <p data-t="remindTitle">Want a reminder to decide?</p>
+          <div class="cal-btns"><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Reply+to+Euri+Quinn%27s+birthday+invite&amp;dates=20261018T010000Z%2F20261018T011500Z&amp;details=Last+day+to+reply+%28until+11%3A59+PM+tonight%29%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F%23rsvp" data-gcal="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Reply+to+Euri+Quinn%27s+birthday+invite&amp;dates=20261018T010000Z%2F20261018T011500Z&amp;details=Last+day+to+reply+%28until+11%3A59+PM+tonight%29%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F%23rsvp" data-ics="euri-reply-reminder.ics" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M12 13v5M9.5 15.5h5"/></svg><span data-t="calAdd">Add to my calendar</span></a></div><small class="cal-hint" hidden data-t="calHint">If nothing opens, tap the ⋮ or share menu and choose “Open in browser”.</small>
+          <small data-t="remindNote">Sunday, October 18 at 9 AM, the last day to reply. Your phone will ask before adding it.</small>
+        </div>
+        <button type="button" class="link-btn" id="changeBtn" data-t="change">Change my reply</button>
+      </div>
+    </div>
+
+    <div class="contact" aria-label="Contact">
+      <p data-t="questions">Questions? Text or call us.</p>
+      <div class="person">
+        <b class="couple">Mr. &amp; Mrs. Siapoc</b>
+        <div class="actions">
+          <button type="button" class="btn ghost" id="textBtn" aria-expanded="false" aria-controls="pickText"><span data-t="text">Text</span></button>
+          <button type="button" class="btn ghost" id="callBtn" aria-expanded="false" aria-controls="pickCall"><span data-t="call">Call</span></button>
+        </div>
+        <div class="pick" id="pickText" hidden>
+          <p data-t="whoText">Who do you want to text?</p>
+          <a class="pick-btn" href="sms:+639851996465"><b>Mr. Siapoc</b><span>+63 985 199 6465</span></a>
+          <a class="pick-btn" href="sms:+639481464334"><b>Mrs. Siapoc</b><span>+63 948 146 4334</span></a>
+        </div>
+        <div class="pick" id="pickCall" hidden>
+          <p data-t="whoCall">Who do you want to call?</p>
+          <a class="pick-btn" href="tel:+639851996465"><b>Mr. Siapoc</b><span>+63 985 199 6465</span></a>
+          <a class="pick-btn" href="tel:+639481464334"><b>Mrs. Siapoc</b><span>+63 948 146 4334</span></a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <svg width="54" height="30" viewBox="0 0 54 30" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="#C08552"/><circle cx="43" cy="11" r="9" fill="#C08552"/><circle cx="11" cy="11" r="4" fill="#F2C7A5"/><circle cx="43" cy="11" r="4" fill="#F2C7A5"/><path d="M6 30a21 21 0 0 1 42 0z" fill="#A8714A"/></svg>
+      <b data-t="seeYou">See you there!</b>
+      <span data-t="family">The Libres family</span>
+    </footer>
+  </section>
+
+  <nav class="pager" aria-label="Sections">
+    <button type="button" class="pg-btn back" id="prevBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></svg>
+      <span data-t="back">Back</span>
+    </button>
+    <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <button type="button" class="pg-btn fwd" id="nextBtn">
+      <span data-t="next">Next</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6"/></svg>
+    </button>
+    <p class="sr-only" id="stepLabel" aria-live="polite"></p>
+  </nav>
+</main>
+
+<script>
+(function () {
+  // Google Apps Script web app that writes replies into the RSVP sheet (ends in /exec).
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbx3w-jbeP9eBznWPbKi-312pz8nHnIkAZBYZoyXp_GSRvCExMcvh6VAHDKYL6kyM63N/exec';
+  var FEE = 100;
+  var TIMEOUT_MS = 20000; // give up on a slow connection instead of spinning forever
+  // Replies close at the end of Sunday, Oct 18 (11:59:59 PM Philippine time = 15:59:59 UTC).
+  var RSVP_CLOSES = Date.UTC(2026, 9, 18, 15, 59, 59);
+  function rsvpClosed() { return Date.now() > RSVP_CLOSES; }
+
+  // ---------- Words in three languages. Bisaya leans Cagay-anon (CDO) in tone. ----------
+  var T = {
+    en: {
+      eyebrow: "You're invited", first: 'First Birthday', tapHint: 'Tap Euri to hear him',
+      heroCopy: 'We would be delighted to hear your response. Please proceed for more details.',
+      back: 'Back', next: 'Next', stepOf: 'Section {i} of 4', detailsTitle: 'Party details',
+      when: 'When', where: 'Where', theme: 'Theme', date: 'Wednesday, October 21, 2026', time: 'Starts at 12:00 noon (Philippine time)',
+      teddy: 'Teddy bears', map: 'Show in Google Maps',
+      perPerson: 'per person', feeTitle: 'Resort entrance fee', feeSub: 'Regular pool access. Kids 2 ft tall and below get in free.',
+      feeNote: 'Please <b>cover your own entrance fee</b>. We can only take care of the food and the event hall. Sorry in advance, and thank you so much for understanding.',
+      countTitle: 'Party starts in', days: 'days', hours: 'hours', mins: 'minutes', countNote: 'Oct 21 · 12 noon, Philippine time',
+      partyDay: "It's party day!", partyDayNote: 'See you at RR Family Spring Resort.',
+      after: 'Thank you for celebrating with us', afterNote: 'Euri Quinn turned one on October 21, 2026.',
+      rsvpTitle: 'Can you come?', lead: 'Please reply by <b>Sunday, October 18</b> so we can plan food and seats.',
+      nameLabel: 'Your name', namePh: 'e.g. Tita Rika', goLegend: 'Can you go?', yes: 'Yes, I can go', maybe: "I'll try", no: "Sorry, I can't",
+      howMany: 'How many of you, including you?', noteLabel: 'Leave a short note', optional: '(optional)', notePh: 'e.g. Happy birthday, Euri!',
+      feeOne: 'Entrance fee: ₱100', feeGroup: 'Entrance fee for your group: up to {fee} (kids 2 ft and below are free)',
+      send: 'Send my reply', sending: 'Sending…', needName: 'Please type your name first.',
+      failed: 'Could not send. Check your signal and try again, or text us.',
+      thanksGoing: 'Thank you, {name}!', onList: "You're on the list: {n}. See you on October 21!", person: '1 person', people: '{n} people',
+      thanksNo: 'Thanks for letting us know, {name}.', missYou: "We'll miss you. You can change your reply anytime before October 18.",
+      thanksMaybe: 'Thanks, {name}!', maybeText: 'We marked you as maybe ({n}). Please confirm by October 18.',
+      calTitle: 'Add it to your calendar', calIcs: 'iPhone & others', calAdd: 'Add to my calendar', calHint: 'If nothing opens, tap the ⋮ or share menu and choose “Open in browser”.',
+      calNote: 'Set a reminder for the day before. Your phone asks before adding it.',
+      remindTitle: 'Want a reminder to decide?',
+      remindNote: 'Sunday, October 18 at 9 AM, the last day to reply. Your phone will ask before adding it.',
+      change: 'Change my reply', closedTitle: 'Replies are closed', closedLead: 'Replies closed on Sunday, October 18. Thank you to everyone who answered!',
+      questions: 'Questions? Text or call us.', whoText: 'Who do you want to text?', whoCall: 'Who do you want to call?', text: 'Text', call: 'Call', save: 'Save contact',
+      seeYou: 'See you there!', family: 'The Libres family'
+    },
+    ceb: {
+      eyebrow: 'Imbitado ka!', first: 'Unang Birthday', tapHint: 'I-tap si Euri para madunggan siya',
+      heroCopy: 'Mag-reply lang ug tan-awa ang detalye sa sunod nga page.',
+      back: 'Balik', next: 'Sunod', stepOf: 'Bahin {i} sa 4', detailsTitle: 'Detalye sa party',
+      when: 'Kanus-a', where: 'Asa', theme: 'Tema', date: 'Miyerkules, Oktubre 21, 2026', time: 'Magsugod alas 12 sa udto',
+      teddy: 'Teddy bear', map: 'Tan-awa sa Google Maps',
+      perPerson: 'kada tawo', feeTitle: 'Entrance fee sa resort', feeSub: 'Regular pool ra. Libre ang bata nga 2 ft ug paubos.',
+      feeNote: 'Palihug, <b>kamo na lang sa inyong entrance fee</b> ha. Ang pagkaon ug event hall ra gyud among makaya. Pasensya na daan, ug salamat kaayo sa pagsabot!',
+      countTitle: 'Hapit na gyud!', days: 'adlaw', hours: 'oras', mins: 'minuto', countNote: 'Okt 21 · alas 12 sa udto',
+      partyDay: 'Karon na ang party!', partyDayNote: 'Kita-kits sa RR Family Spring Resort!',
+      after: 'Salamat sa pag-celebrate uban namo', afterNote: 'Nag-1 year old na si Euri Quinn niadtong Oktubre 21, 2026.',
+      rsvpTitle: 'Makaadto ka?', lead: 'Palihug tubag una mag-<b>Domingo, Oktubre 18</b>, para ma-ready namo ang pagkaon ug lingkuranan.',
+      nameLabel: 'Imong ngalan', namePh: 'pananglit, Tita Rika', goLegend: 'Makaadto ka?', yes: 'Oo, makaadto ko', maybe: 'Sulayan nako', no: 'Sorry, di ko makaadto',
+      howMany: 'Pila mo ka buok, apil na ka?', noteLabel: 'Mubo nga mensahe', optional: '(kung gusto lang)', notePh: 'pananglit, Happy birthday, Euri!',
+      feeOne: 'Entrance fee: ₱100', feeGroup: 'Entrance fee sa inyong grupo: hangtod {fee} (libre ang bata nga 2 ft ug paubos)',
+      send: 'I-send akong tubag', sending: 'Gapadala pa…', needName: 'Palihug isulat una imong ngalan.',
+      failed: 'Wala na-send. Tan-awa imong signal ug sulayi balik, o i-text mi.',
+      thanksGoing: 'Salamat kaayo, {name}!', onList: 'Nalista na ka: {n}. Kita-kits sa Oktubre 21!', person: '1 ka buok', people: '{n} ka buok',
+      thanksNo: 'Salamat sa pag-ingon, {name}.', missYou: 'Ma-miss ka namo. Pwede pa nimo usbon imong tubag una mag-Oktubre 18.',
+      thanksMaybe: 'Salamat, {name}!', maybeText: 'Gilista ka namo nga basin ({n}). Palihug kumpirma una mag-Oktubre 18.',
+      calTitle: 'I-add sa imong calendar', calIcs: 'iPhone ug uban pa', calAdd: 'I-add sa akong calendar', calHint: 'Kung walay mo-abli, i-tap ang ⋮ o share ug pilia ang “Open in browser”.',
+      calNote: 'Butangi ug reminder sa adlaw sa wala pa. Mangutana una imong phone sa dili pa i-add.',
+      remindTitle: 'Gusto ka ug reminder para makadesisyon?',
+      remindNote: 'Domingo, Oktubre 18, alas 9 sa buntag, ang katapusang adlaw sa pagtubag. Mangutana una imong phone sa dili pa i-add.',
+      change: 'Usba akong tubag', closedTitle: 'Sirado na ang tubag', closedLead: 'Nasirado na ang tubag niadtong Domingo, Oktubre 18. Salamat sa tanan nga ni-tubag!',
+      questions: 'Naa kay pangutana? I-text o tawagi mi.', whoText: 'Kinsa imong i-text?', whoCall: 'Kinsa imong tawagan?', text: 'Text', call: 'Tawag', save: 'I-save ang contact',
+      seeYou: 'Kita-kits!', family: 'Pamilya Libres'
+    },
+    tl: {
+      eyebrow: 'Imbitado ka!', first: 'Unang Kaarawan', tapHint: 'I-tap si Euri para marinig siya',
+      heroCopy: 'Ikalulugod naming matanggap ang inyong tugon. Magpatuloy po para sa iba pang detalye.',
+      back: 'Bumalik', next: 'Susunod', stepOf: 'Bahagi {i} ng 4', detailsTitle: 'Detalye ng party',
+      when: 'Kailan', where: 'Saan', theme: 'Tema', date: 'Miyerkules, Oktubre 21, 2026', time: 'Magsisimula ng 12:00 ng tanghali',
+      teddy: 'Teddy bear', map: 'Tingnan sa Google Maps',
+      perPerson: 'bawat tao', feeTitle: 'Entrance fee sa resort', feeSub: 'Regular pool lang. Libre ang batang 2 ft pababa.',
+      feeNote: '<b>Kayo na po sana ang bahala sa inyong entrance fee</b>. Pagkain at event hall lang po ang kaya naming sagutin. Pasensya na po in advance, at maraming salamat sa pag-unawa!',
+      countTitle: 'Malapit na!', days: 'araw', hours: 'oras', mins: 'minuto', countNote: 'Okt 21 · 12 ng tanghali',
+      partyDay: 'Ngayon na ang party!', partyDayNote: 'Kita-kits sa RR Family Spring Resort!',
+      after: 'Salamat sa pakikiisa sa amin', afterNote: 'Nag-isang taon na si Euri Quinn noong Oktubre 21, 2026.',
+      rsvpTitle: 'Makakapunta ka ba?', lead: 'Pakisagot bago mag-<b>Linggo, Oktubre 18</b>, para maihanda namin ang pagkain at upuan.',
+      nameLabel: 'Pangalan mo', namePh: 'halimbawa: Tita Rika', goLegend: 'Makakapunta ka ba?', yes: 'Oo, pupunta ako', maybe: 'Susubukan ko', no: 'Pasensya, hindi ako makakapunta',
+      howMany: 'Ilan kayo, kasama ka?', noteLabel: 'Maikling mensahe', optional: '(opsyonal)', notePh: 'halimbawa: Happy birthday, Euri!',
+      feeOne: 'Entrance fee: ₱100', feeGroup: 'Entrance fee ng grupo ninyo: hanggang {fee} (libre ang batang 2 ft pababa)',
+      send: 'Ipadala ang sagot ko', sending: 'Ipinapadala…', needName: 'Pakisulat muna ang pangalan mo.',
+      failed: 'Hindi naipadala. Tingnan ang signal mo at subukan ulit, o i-text kami.',
+      thanksGoing: 'Salamat, {name}!', onList: 'Nailista ka na: {n}. Kita-kits sa Oktubre 21!', person: '1 katao', people: '{n} katao',
+      thanksNo: 'Salamat sa pagpapaalam, {name}.', missYou: 'Mami-miss ka namin. Puwede mo pang palitan ang sagot mo bago mag-Oktubre 18.',
+      thanksMaybe: 'Salamat, {name}!', maybeText: 'Nailista ka namin bilang baka ({n}). Pakikumpirma bago mag-Oktubre 18.',
+      calTitle: 'Idagdag sa calendar mo', calIcs: 'iPhone at iba pa', calAdd: 'Idagdag sa calendar ko', calHint: 'Kung walang bumukas, i-tap ang ⋮ o share at piliin ang “Open in browser”.',
+      calNote: 'Lagyan ng paalala sa araw bago nito. Magtatanong muna ang phone mo bago ito idagdag.',
+      remindTitle: 'Gusto mo ng paalala para makapagpasya?',
+      remindNote: 'Linggo, Oktubre 18, 9 ng umaga, ang huling araw ng pagsagot. Magtatanong muna ang phone mo bago ito idagdag.',
+      change: 'Palitan ang sagot ko', closedTitle: 'Sarado na ang pagsagot', closedLead: 'Nagsara na ang pagsagot noong Linggo, Oktubre 18. Salamat sa lahat ng sumagot!',
+      questions: 'May tanong? I-text o tawagan kami.', whoText: 'Sino ang ite-text mo?', whoCall: 'Sino ang tatawagan mo?', text: 'Text', call: 'Tawag', save: 'I-save ang contact',
+      seeYou: 'Kita-kits!', family: 'Pamilya Libres'
+    }
+  };
+  var lang = 'en';
+  try {
+    var q = new URLSearchParams(location.search).get('lang');
+    var stored = localStorage.getItem('euri-lang');
+    if (T[q]) lang = q; else if (T[stored]) lang = stored;
+  } catch (e) {}
+  function t(key, vars) {
+    var s = T[lang][key] || T.en[key] || '';
+    if (vars) Object.keys(vars).forEach(function (k) { s = s.split('{' + k + '}').join(vars[k]); });
+    return s;
+  }
+  var langBtns = document.querySelectorAll('.langs button');
+  function applyLang() {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-t]').forEach(function (el) {
+      var s = t(el.getAttribute('data-t'));
+      if (el.hasAttribute('data-html')) el.innerHTML = s; else el.textContent = s; // data-html strings are our own, above
+    });
+    document.querySelectorAll('[data-ph]').forEach(function (el) { el.placeholder = t(el.getAttribute('data-ph')); });
+    langBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    refresh(); tick(); applyDeadline(); updatePager();
+    if (lastReply && !done.hidden) showDone(lastReply);
+  }
+  langBtns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      lang = b.getAttribute('data-lang');
+      try { localStorage.setItem('euri-lang', lang); } catch (e) {}
+      applyLang();
+    });
+  });
+
+  // Hero: Euri's animated cutout loops silently (like the old GIF). A tap fades in a second video,
+  // his real "Waaaah!" with sound, once; then it fades back to the loop. Sound only ever starts
+  // from a tap, so mobile autoplay rules never block it. Reduced-motion visitors see the still.
+  var art = document.getElementById('art');
+  var idle = document.getElementById('idle');
+  var vid = document.getElementById('waah');
+  var stillOnly = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var guard = 0;
+  function playIdle() {
+    if (stillOnly || document.hidden || document.getElementById('s-top').hidden || !idle.paused) return;
+    idle.muted = true;
+    var p = idle.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+  if (stillOnly) {
+    idle.removeAttribute('autoplay');
+    idle.pause();
+  } else {
+    // start as soon as it can, again when the page comes back into view,
+    // and on the first touch or scroll for in-app browsers that hold autoplay back
+    playIdle();
+    ['loadeddata', 'canplay'].forEach(function (ev) { idle.addEventListener(ev, playIdle); });
+    document.addEventListener('visibilitychange', playIdle);
+    ['touchstart', 'click', 'scroll'].forEach(function (ev) { window.addEventListener(ev, playIdle, { passive: true, once: true }); });
+  }
+  function endWaah() {
+    clearTimeout(guard);
+    art.classList.remove('playing');
+    setTimeout(function () {
+      if (!art.classList.contains('playing')) { try { vid.pause(); vid.currentTime = 0; } catch (e) {} }
+    }, 200);
+    playIdle();
+  }
+  function heroAway() {   // leaving the first section: stop everything
+    clearTimeout(guard);
+    art.classList.remove('playing');
+    try { vid.pause(); vid.currentTime = 0; } catch (e) {}
+    try { idle.pause(); } catch (e) {}
+  }
+  document.getElementById('tap').addEventListener('click', function () {
+    try { vid.currentTime = 0; } catch (e) {}
+    vid.muted = false;
+    var p = vid.play();
+    art.classList.add('playing');
+    clearTimeout(guard);
+    guard = setTimeout(endWaah, 4000); // never leave it stuck if the clip stalls
+    if (p && p.catch) p.catch(endWaah); // media blocked or missing: the loop stays
+  });
+  vid.addEventListener('ended', endWaah);
+
+  // Keep the full name on one line; shrink it only when the screen is too narrow.
+  var nameLine = document.getElementById('fullName');
+  function fitName() {
+    nameLine.style.fontSize = '';
+    var room = nameLine.clientWidth, need = nameLine.scrollWidth;
+    if (need > room) nameLine.style.fontSize = (parseFloat(getComputedStyle(nameLine).fontSize) * room / need * 0.97) + 'px';
+  }
+  fitName();
+  window.addEventListener('resize', fitName);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
+
+  // Countdown: 12:00 PM Philippine time (UTC+8) = 04:00 UTC
+  var target = Date.UTC(2026, 9, 21, 4, 0, 0);
+  var partyEnd = target + 4 * 3600 * 1000;
+  function tick() {
+    var now = Date.now();
+    var diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('ticks').hidden = true;
+      document.getElementById('countTitle').textContent = now < partyEnd ? t('partyDay') : t('after');
+      document.getElementById('countNote').textContent = now < partyEnd ? t('partyDayNote') : t('afterNote');
+      return;
+    }
+    var mins = Math.floor(diff / 60000);
+    document.getElementById('d').textContent = Math.floor(mins / 1440);
+    document.getElementById('h').textContent = Math.floor((mins % 1440) / 60);
+    document.getElementById('m').textContent = mins % 60;
+  }
+  setInterval(tick, 15000);
+
+  // RSVP
+  var form = document.getElementById('rsvpForm');
+  var nameEl = document.getElementById('guestName');
+  var countEl = document.getElementById('guestCount');
+  var countField = document.getElementById('countField');
+  var noteField = document.getElementById('noteField');
+  var noteEl = document.getElementById('guestNote');
+  var feeEl = document.getElementById('groupFee');
+  var statusEl = document.getElementById('status');
+  var sendBtn = document.getElementById('sendBtn');
+  var done = document.getElementById('done');
+  var maybeChoice = document.getElementById('maybeChoice');
+  var lastReply = null;
+  var REMIND_AT = Date.UTC(2026, 9, 18, 1, 0, 0);   // "decide" reminder: Sun Oct 18, 9 AM Philippine time
+  var RADIO = { going: 'goingYes', maybe: 'goingMaybe', not_going: 'goingNo' };
+
+  function answer() { var c = document.querySelector('input[name="status"]:checked'); return c ? c.value : 'going'; }
+  function count() {
+    var n = parseInt(countEl.value, 10);
+    if (!(n >= 1)) n = 1;
+    if (n > 20) n = 20;
+    return n;
+  }
+  function peso(n) { return '₱' + n.toLocaleString('en-PH'); }
+  function refresh() {
+    countField.hidden = answer() === 'not_going';
+    noteField.hidden = answer() === 'going';
+    var n = count();
+    feeEl.textContent = n === 1 ? t('feeOne') : t('feeGroup', { fee: peso(n * FEE) });
+  }
+  function setStatus(text, isErr) {
+    statusEl.textContent = text;
+    statusEl.classList.toggle('err', !!isErr);
+  }
+  document.getElementById('minus').addEventListener('click', function () { countEl.value = Math.max(1, count() - 1); refresh(); });
+  document.getElementById('plus').addEventListener('click', function () { countEl.value = Math.min(20, count() + 1); refresh(); });
+  countEl.addEventListener('input', refresh);
+  countEl.addEventListener('blur', function () { countEl.value = count(); refresh(); });
+  document.querySelectorAll('input[name="status"]').forEach(function (el) { el.addEventListener('change', refresh); });
+
+  function showDone(r) {
+    lastReply = r;
+    var who = r.count === 1 ? t('person') : t('people', { n: r.count });
+    var key = r.status === 'going' ? ['thanksGoing', 'onList'] : r.status === 'maybe' ? ['thanksMaybe', 'maybeText'] : ['thanksNo', 'missYou'];
+    document.getElementById('doneTitle').textContent = t(key[0], { name: r.name });
+    document.getElementById('doneText').textContent = t(key[1], { n: who });
+    // calendar: the party (with reminders) for "yes"; a reminder to decide for "I'll try"
+    document.getElementById('calGoing').hidden = r.status !== 'going';
+    document.getElementById('calMaybe').hidden = r.status !== 'maybe' || Date.now() > REMIND_AT;
+    form.hidden = true;
+    done.hidden = false;
+  }
+  function remember(r) { try { localStorage.setItem('euri-rsvp', JSON.stringify(r)); } catch (e) {} }
+  try {
+    var saved = JSON.parse(localStorage.getItem('euri-rsvp') || 'null');
+    if (saved && saved.name) {
+      nameEl.value = saved.name;
+      if (saved.status === 'maybe') maybeChoice.hidden = false;
+      document.getElementById(RADIO[saved.status] || 'goingYes').checked = true;
+      countEl.value = saved.count || 1;
+      noteEl.value = saved.note || '';
+      showDone(saved);
+    }
+  } catch (e) {}
+
+  // "I'll try" needs the updated sheet script (version 2). Ask it once; until then the option stays hidden.
+  fetch(SHEET_URL + '?check=1').then(function (res) { return res.json(); }).then(function (j) {
+    if (j && j.version >= 2) maybeChoice.hidden = false;
+  }).catch(function () {});
+
+  // After the deadline the form closes; guests who still need changes text or call.
+  function applyDeadline() {
+    if (!rsvpClosed()) return false;
+    form.hidden = true;
+    document.getElementById('changeBtn').hidden = true;
+    document.getElementById('rsvpTitle').textContent = t('closedTitle');
+    document.getElementById('rsvpLead').textContent = t('closedLead');
+    return true;
+  }
+
+  document.getElementById('changeBtn').addEventListener('click', function () {
+    if (applyDeadline()) return;
+    done.hidden = true;
+    form.hidden = false;
+    setStatus('');
+    nameEl.focus();
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (applyDeadline()) return;
+    var name = nameEl.value.replace(/\s+/g, ' ').trim();
+    if (!name) { setStatus(t('needName'), true); nameEl.focus(); return; }
+    var a = answer();
+    var r = { name: name, status: a, count: a === 'not_going' ? 0 : count(),
+              note: a === 'going' ? '' : noteEl.value.replace(/\s+/g, ' ').trim().slice(0, 200) };
+    var body = new URLSearchParams({ name: r.name, status: r.status, count: String(r.count), note: r.note });
+    sendBtn.disabled = true;
+    setStatus(t('sending'));
+
+    function ok() { remember(r); setStatus(''); showDone(r); }
+    function fail(msg) { setStatus(msg || t('failed'), true); }
+    function post(opts) {
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, TIMEOUT_MS) : 0;
+      if (ctrl) opts.signal = ctrl.signal;
+      return fetch(SHEET_URL, opts).then(
+        function (res) { clearTimeout(timer); return res; },
+        function (err) { clearTimeout(timer); throw err; });
+    }
+
+    // Only say "thank you" when the sheet confirms the save. Sending again is safe:
+    // the sheet keeps one row per name.
+    post({ method: 'POST', body: body })
+      .then(function (res) { return res.json(); })
+      .then(function (j) {
+        if (j && j.ok) ok(); else fail(j && j.error);
+      }, function () { fail(); })
+      .then(function () { sendBtn.disabled = false; });
+  });
+
+  // Contact: one card for both parents; Text / Call opens a choice of who.
+  [['textBtn', 'pickText'], ['callBtn', 'pickCall']].forEach(function (pair, i, all) {
+    var btn = document.getElementById(pair[0]);
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      all.forEach(function (o) {
+        document.getElementById(o[0]).setAttribute('aria-expanded', 'false');
+        document.getElementById(o[1]).hidden = true;
+      });
+      btn.setAttribute('aria-expanded', String(open));
+      document.getElementById(pair[1]).hidden = !open;
+    });
+  });
+
+  // Calendar: one button that picks what works on this phone. iPhone Safari opens the .ics file
+  // (with its reminders) straight in Apple Calendar; Android and in-app browsers (Messenger,
+  // Facebook) can't import a file reliably, so they get Google Calendar's "add event" page.
+  (function () {
+    var ua = navigator.userAgent || '';
+    var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var inApp = /FBAN|FBAV|FB_IAB|Messenger|Instagram|Line\/|TikTok|MicroMessenger/i.test(ua);
+    var appleCal = (ios || /Macintosh/.test(ua)) && !inApp;
+    document.querySelectorAll('.cal-btn[data-ics]').forEach(function (a) {
+      if (appleCal) { a.href = a.getAttribute('data-ics'); a.removeAttribute('target'); }
+      else a.href = a.getAttribute('data-gcal');
+    });
+    if (inApp) document.querySelectorAll('.cal-hint').forEach(function (h) { h.hidden = false; });
+  })();
+
+  // ---------- One section at a time, like a form ----------
+  // Next adds a history entry, so the phone's own Back button / gesture also steps back.
+  var NAMES = ['', 'details', 'fee', 'rsvp'];
+  var FOCUS = ['heroTitle', 'detailsTitle', 'feeTitle', 'rsvpTitle'];
+  var screens = [].slice.call(document.querySelectorAll('.screen'));
+  var dots = [].slice.call(document.querySelectorAll('.dots span'));
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var LAST = screens.length - 1;
+  var cur = -1;
+  function stepFromHash() { var i = NAMES.indexOf(location.hash.replace('#', '')); return i < 0 ? 0 : i; }
+  function urlFor(i) { return location.pathname + location.search + (NAMES[i] ? '#' + NAMES[i] : ''); }
+  function updatePager() {
+    if (cur < 0) return;
+    prevBtn.classList.toggle('invisible', cur === 0); prevBtn.disabled = cur === 0;
+    nextBtn.classList.toggle('invisible', cur === LAST); nextBtn.disabled = cur === LAST;
+    nextBtn.classList.toggle('nudge', cur === 0);
+    dots.forEach(function (d, k) { d.className = k === cur ? 'on' : (k < cur ? 'past' : ''); });
+    document.getElementById('stepLabel').textContent = t('stepOf', { i: cur + 1 });
+  }
+  function show(i, dir, moveFocus) {
+    i = Math.max(0, Math.min(LAST, i));
+    if (i === cur) return;
+    if (i !== 0) heroAway();
+    screens.forEach(function (sc, k) { sc.hidden = k !== i; sc.classList.remove('from-right', 'from-left'); });
+    if (dir) { void screens[i].offsetWidth; screens[i].classList.add(dir > 0 ? 'from-right' : 'from-left'); }
+    cur = i;
+    updatePager();
+    window.scrollTo(0, 0);
+    if (i === 0) { fitName(); playIdle(); }
+    if (moveFocus) { var h = document.getElementById(FOCUS[i]); if (h) h.focus({ preventScroll: true }); }
+  }
+  function goNext() {
+    if (cur >= LAST) return;
+    var i = cur + 1;
+    history.pushState({ step: i, pushed: true }, '', urlFor(i));
+    show(i, 1, true);
+  }
+  function goBack() {
+    if (cur <= 0) return;
+    var st = history.state;
+    if (st && st.pushed && st.step === cur) { history.back(); return; } // popstate shows the previous section
+    var i = cur - 1;
+    history.replaceState({ step: i }, '', urlFor(i));
+    show(i, -1, true);
+  }
+  nextBtn.addEventListener('click', goNext);
+  prevBtn.addEventListener('click', goBack);
+  window.addEventListener('popstate', function (e) {
+    var i = e.state && typeof e.state.step === 'number' ? e.state.step : stepFromHash();
+    show(i, i < cur ? -1 : 1, true);
+  });
+  // Arrow keys (not while typing or choosing an answer).
+  document.addEventListener('keydown', function (e) {
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    var tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable) return;
+    if (e.key === 'ArrowRight') goNext(); else if (e.key === 'ArrowLeft') goBack();
+  });
+  // Swipe left / right on phones: only a clear sideways swipe, never while typing.
+  var sx = 0, sy = 0, swiping = false;
+  document.addEventListener('touchstart', function (e) {
+    var inField = e.target.closest && e.target.closest('input, textarea, select');
+    swiping = e.touches.length === 1 && !inField;
+    if (swiping) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }
+  }, { passive: true });
+  document.addEventListener('touchend', function (e) {
+    if (!swiping) return;
+    swiping = false;
+    var p = e.changedTouches[0], dx = p.clientX - sx, dy = p.clientY - sy;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > 2 * Math.abs(dy)) { if (dx < 0) goNext(); else goBack(); }
+  }, { passive: true });
+
+  var first = stepFromHash();
+  history.replaceState({ step: first }, '', urlFor(first));
+  show(first, 0, false);
+  applyLang();
+})();
+</script>
+</body>
+</html>

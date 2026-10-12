@@ -1,0 +1,29 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Libres family//Euri invite//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:euri-quinn-1st-birthday-20261021@islawqt.github.io
+DTSTAMP:20261012T000000Z
+DTSTART:20261021T040000Z
+DTEND:20261021T080000Z
+SUMMARY:Euri Quinn's 1st Birthday
+LOCATION:RR Family Spring Resort\, Purok 3\, Tubigon\, Maramag\, Bukidnon 8
+ 714
+DESCRIPTION:Teddy bear theme. Resort entrance fee: PHP 100 per person (kids
+  2 ft and below free)\, please bring your own. Map: https://maps.app.goo.g
+ l/kDxDsRqXwA4XVtbm7 \nInvite: https://islawqt.github.io/euri/
+URL:https://islawqt.github.io/euri/
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-P1D
+DESCRIPTION:Tomorrow at 12 noon: Euri Quinn's 1st Birthday
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+TRIGGER:-PT2H
+DESCRIPTION:Euri Quinn's 1st Birthday starts in 2 hours
+END:VALARM
+END:VEVENT
+END:VCALENDAR
