@@ -272,6 +272,7 @@ h1 { margin: 0; text-align: center; font: 700 clamp(1.6rem, 7.4vw, 2.1rem)/1.12 
   ['albumLink', 'albumBtn2'].forEach(function (id) { $(id).href = ALBUM_URL; });
 
   // ---------- state ----------
+  if (/[?&]reset=1/.test(location.search)) { store('euri-cam-used', '0'); history.replaceState(null, '', location.pathname); }   // for testing on your own phone
   var used = Math.min(SHOTS, parseInt(store('euri-cam-used'), 10) || 0);
   var guest = store('euri-cam-name') || '';
   if (!guest) { try { var r = JSON.parse(store('euri-rsvp') || 'null'); if (r && r.name) guest = r.name; } catch (e) {} }   // their RSVP name, if they replied on this phone
