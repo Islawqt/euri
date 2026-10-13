@@ -15,10 +15,13 @@
 <meta property="og:image:height" content="630">
 <meta name="theme-color" content="#2A1B14">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='18' cy='18' r='12' fill='%23A8714A'/%3E%3Ccircle cx='46' cy='18' r='12' fill='%23A8714A'/%3E%3Ccircle cx='32' cy='36' r='24' fill='%23A8714A'/%3E%3Ctext x='32' y='47' font-size='30' font-family='sans-serif' font-weight='800' text-anchor='middle' fill='%23FFF8EE'%3E1%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<!-- Fonts live next to the page (trimmed to what the invite uses), so nothing waits on another site -->
+<link rel="preload" href="fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="euri-still.webp" as="image" fetchpriority="high">
 <style>
+@font-face { font-family: "Nunito"; font-style: normal; font-weight: 400 800; font-display: swap; src: url(fonts/nunito.woff2) format("woff2"); }
+@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 500 700; font-display: swap; src: url(fonts/fredoka.woff2) format("woff2"); }
 /* Teddy-bear scrapbook: dark chocolate page, cream stitched panels, honey highlights.
    Four sections shown one at a time, like a form: Back / Next (or swipe, or the arrow keys).
    A section taller than the phone simply scrolls, so nothing is ever cut off. */
@@ -41,7 +44,7 @@
   --ok: #3F6B3A;
   --ok-bg: #EEF4E6;
   --err: #A8432A;
-  --font-display: "Fredoka", "Baloo 2", system-ui, sans-serif;
+  --font-display: "Fredoka", "Nunito", "Baloo 2", system-ui, sans-serif;   /* Nunito fills in the ₱ sign */
   --font-body: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 * { box-sizing: border-box; }
@@ -104,7 +107,7 @@ body {
   position: relative; width: min(100%, 21rem); border-radius: 30px; overflow: hidden; background: #F3E7D3;
   box-shadow: 0 0 0 6px var(--cream), 0 14px 30px rgba(0, 0, 0, .35); margin: .5rem 0 .4rem;
 }
-.art video { width: 100%; height: auto; aspect-ratio: 960 / 992; display: block; object-fit: cover; }
+.art video { width: 100%; height: auto; aspect-ratio: 768 / 794; display: block; object-fit: cover; }
 .art video.over { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .15s; }
 .art.playing video.over { opacity: 1; }
 .art .tap {
@@ -280,6 +283,7 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
   position: fixed; left: 0; top: 0; z-index: 6; width: 320px; height: 548px; transform-origin: 0 0;
   pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
 }
+.gift:not(.open) { will-change: transform; }   /* floating moves on the graphics chip; dropped when opened so it re-draws sharp */
 .gift > * { pointer-events: auto; cursor: pointer; }
 .gift.open > * { pointer-events: none; }   /* opened: a tap anywhere but the QR closes it */
 .gift.open .gift-qr { pointer-events: auto; cursor: default; }
@@ -333,11 +337,11 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
 </head>
 <body>
 <div class="stickers" aria-hidden="true">
-  <img class="stk s1" src="euri-sticker-1.webp" alt="" width="275" height="319" decoding="async">
-  <img class="stk s2" src="euri-sticker-2.webp" alt="" width="252" height="314" decoding="async">
-  <img class="stk s3" src="euri-sticker-3.webp" alt="" width="249" height="313" decoding="async">
-  <img class="stk s4" src="euri-sticker-4.webp" alt="" width="237" height="313" decoding="async">
-  <img class="stk s5" src="euri-sticker-5.webp" alt="" width="268" height="315" decoding="async">
+  <img fetchpriority="low" class="stk s1" src="euri-sticker-1.webp" alt="" width="275" height="319" decoding="async">
+  <img fetchpriority="low" class="stk s2" src="euri-sticker-2.webp" alt="" width="252" height="314" decoding="async">
+  <img fetchpriority="low" class="stk s3" src="euri-sticker-3.webp" alt="" width="249" height="313" decoding="async">
+  <img fetchpriority="low" class="stk s4" src="euri-sticker-4.webp" alt="" width="237" height="313" decoding="async">
+  <img fetchpriority="low" class="stk s5" src="euri-sticker-5.webp" alt="" width="268" height="315" decoding="async">
 </div>
 <main class="shell">
   <div class="langs" role="group" aria-label="Language">
@@ -351,12 +355,12 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
     <header class="hero">
       <span class="eyebrow" data-t="eyebrow">You're invited</span>
       <div class="art" id="art">
-        <video id="idle" autoplay muted loop playsinline preload="auto" poster="euri-still.jpg" width="960" height="992" aria-hidden="true">
-          <source src="euri-idle.mp4" type='video/mp4; codecs="avc1.640020"'>
+        <video id="idle" autoplay muted loop playsinline preload="auto" poster="euri-still.webp" width="768" height="794" aria-hidden="true">
+          <source src="euri-idle.mp4" type='video/mp4; codecs="avc1.640028"'>
           <source src="euri-idle.webm" type='video/webm; codecs="vp9"'>
         </video>
-        <video id="waah" class="over" playsinline preload="auto" width="960" height="992" aria-hidden="true">
-          <source src="euri-waah.mp4" type='video/mp4; codecs="avc1.640020, mp4a.40.2"'>
+        <video id="waah" class="over" playsinline preload="none" width="768" height="794" aria-hidden="true">
+          <source src="euri-waah.mp4" type='video/mp4; codecs="avc1.640028, mp4a.40.2"'>
           <source src="euri-waah.webm" type='video/webm; codecs="vp9, opus"'>
         </video>
         <button type="button" class="tap" id="tap" aria-label="Play Euri saying Waaah, with sound">
@@ -736,6 +740,18 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
     if (p && p.catch) p.catch(endWaah); // media blocked or missing: the loop stays
   });
   vid.addEventListener('ended', endWaah);
+  // The "Waaah!" clip isn't needed until a tap, so it downloads after the page is up (or at the first touch),
+  // leaving the first seconds of a slow connection to what guests see first.
+  var waahLoading = false;
+  function loadWaah() {
+    if (waahLoading) return;
+    waahLoading = true;
+    vid.preload = 'auto';
+    try { vid.load(); } catch (e) {}
+  }
+  if (document.readyState === 'complete') setTimeout(loadWaah, 1200);
+  else window.addEventListener('load', function () { setTimeout(loadWaah, 1200); });
+  ['touchstart', 'pointerdown', 'keydown'].forEach(function (ev) { window.addEventListener(ev, loadWaah, { passive: true, once: true }); });
 
   // Keep the full name on one line; shrink it only when the screen is too narrow.
   var nameLine = document.getElementById('fullName');
@@ -994,10 +1010,19 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
     }
   } catch (e) {}
 
-  // "I'll try" needs the updated sheet script (version 2). Ask it once; until then the option stays hidden.
-  fetch(SHEET_URL + '?check=1').then(function (res) { return res.json(); }).then(function (j) {
-    if (j && j.version >= 2) maybeChoice.hidden = false;
-  }).catch(function () {});
+  // "I'll try" needs the updated sheet script (version 2); until it answers, the option stays hidden.
+  // Asked once the page is up (not during the first paint), and again when the reply section opens:
+  // that also wakes the sheet script, so "Send my reply" answers faster.
+  var lastPing = 0;
+  function pingSheet() {
+    if (Date.now() - lastPing < 60000) return;
+    lastPing = Date.now();
+    fetch(SHEET_URL + '?check=1').then(function (res) { return res.json(); }).then(function (j) {
+      if (j && j.version >= 2) maybeChoice.hidden = false;
+    }).catch(function () {});
+  }
+  if (document.readyState === 'complete') setTimeout(pingSheet, 1500);
+  else window.addEventListener('load', function () { setTimeout(pingSheet, 1500); });
 
   // After the deadline the form closes; guests who still need changes text or call.
   function applyDeadline() {
@@ -1152,6 +1177,7 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
     updatePager();
     window.scrollTo(0, 0);
     if (i === 0) { fitName(); playIdle(); }
+    if (i === LAST) pingSheet();   // wake the sheet script before they send
     if (moveFocus) { var h = document.getElementById(FOCUS[i]); if (h) h.focus({ preventScroll: true }); }
     gift.sync();
   }
