@@ -289,9 +289,13 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
 .gift.open .gift-qr { pointer-events: auto; cursor: default; }
 .gift:focus-visible { outline: none !important; }
 .gift:focus-visible .gift-sign { outline: 4px solid var(--cream); outline-offset: 4px; }
-.gift-euri { position: absolute; left: 10px; top: 0; width: 300px; height: auto; -webkit-user-drag: none; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .35)); }
+.gift-euri { position: absolute; left: 10px; top: 0; width: 300px; height: auto; -webkit-user-drag: none; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .35)); transition: opacity .35s; }
+/* floating: Euri looking down at the QR. Opened: caught, laughing over the top of it */
+.gift-got { opacity: 0; }
+.gift.open .gift-euri { opacity: 0; }
+.gift.open .gift-got { opacity: 1; }
 .gift-sign {
-  position: absolute; left: 22px; top: 238px; width: 276px; padding: 18px 18px 12px; border-radius: 24px;
+  position: absolute; left: 10px; top: 238px; width: 300px; padding: 18px 30px 12px; border-radius: 24px;
   display: grid; justify-items: center; gap: 8px; background: var(--honey); transform: rotate(-4deg); transition: transform .5s;
   box-shadow: 0 6px 0 var(--honey-dark), 0 18px 30px rgba(0, 0, 0, .35);
 }
@@ -307,7 +311,10 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
   position: absolute; right: -4px; top: 14px; max-width: 176px; padding: 12px 16px; border-radius: 24px;
   background: var(--cream); color: var(--cocoa); font: 700 31px/1.06 var(--font-display); text-align: center;
   box-shadow: 0 6px 16px rgba(0, 0, 0, .3); transform: rotate(7deg);
+  transition: top .4s, right .4s, max-width .4s, font-size .4s, padding .4s;
 }
+/* opened: smaller, beside his face (not over it), still pointing at him */
+.gift.open .gift-bubble { top: 108px; right: -2px; max-width: 126px; padding: 10px 12px; font-size: 22px; }
 .gift-bubble::after { content: ""; position: absolute; left: 6px; bottom: -14px; border: 16px solid transparent; border-top-color: var(--cream); border-bottom: 0; transform: rotate(32deg); }
 .gift.open { z-index: 21; }
 .gift-shade {
@@ -331,7 +338,7 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
 .gift-spot { justify-self: center; width: 131px; height: 225px; margin: .4rem 0 .2rem; }
 @media (prefers-reduced-motion: reduce) {
   .screen.from-right, .screen.from-left, .pg-btn.fwd.nudge svg { animation: none; }
-  .dots span, .art .hint, .art video.over, .gift-shade, .gift-panel { transition: none; }
+  .dots span, .art .hint, .art video.over, .gift-shade, .gift-panel, .gift-euri, .gift-bubble, .gift-sign { transition: none; }
 }
 </style>
 </head>
@@ -533,6 +540,7 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
 <div class="gift-shade" id="giftShade" hidden></div>
 <div class="gift" id="gift" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="giftPanel" aria-label="Euri is hiding something. Tap to see." hidden>
   <img class="gift-euri" src="euri-carry.webp" alt="" width="574" height="740" loading="lazy" decoding="async">
+  <img class="gift-euri gift-got" src="euri-got.webp" alt="" width="900" height="1136" loading="lazy" decoding="async">
   <span class="gift-sign">
     <span class="gift-tape l" aria-hidden="true"></span><span class="gift-tape r" aria-hidden="true"></span>
     <img class="gift-qr" src="euri-gift-qr.png" alt="InstaPay QR code for a gift to Euri" width="966" height="966" loading="lazy" decoding="async">
