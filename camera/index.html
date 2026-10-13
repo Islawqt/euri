@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Euri's Party Camera 📸</title>
+<meta name="description" content="Snap photos at Euri Quinn's 1st birthday. They go straight to the family album.">
+<meta name="theme-color" content="#2A1B14">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='18' cy='18' r='12' fill='%23A8714A'/%3E%3Ccircle cx='46' cy='18' r='12' fill='%23A8714A'/%3E%3Ccircle cx='32' cy='36' r='24' fill='%23A8714A'/%3E%3Ccircle cx='32' cy='38' r='9' fill='%23FFF8EE'/%3E%3C/svg%3E">
+<link rel="preload" href="../fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face { font-family: "Nunito"; font-style: normal; font-weight: 400 800; font-display: swap; src: url(../fonts/nunito.woff2) format("woff2"); }
+@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../fonts/fredoka.woff2) format("woff2"); }
+:root {
+  --choc: #2A1B14; --choc-2: #3A271D; --cream: #FFF6E9; --card: #FFFDF8; --tan: #F6E3C6; --cocoa: #4A2F22; --brown: #7A4E33;
+  --honey: #E0A042; --honey-dark: #B97A24; --on-honey: #3A2418; --stitch: #D8BC9C; --line: #E3CDB0; --muted: #5C4334;
+  --on-choc: #F3E4D0; --on-choc-muted: #D2BCA6; --ok: #8BC48A; --warn: #F0B35B;
+  --font-display: "Fredoka", "Nunito", system-ui, sans-serif; --font-body: "Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; min-height: 100svh; background: var(--choc); color: var(--on-choc); font: 1rem/1.5 var(--font-body); overflow-x: hidden; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--honey) !important; outline-offset: 2px !important; }
+button, input { font: inherit; }
+.shell { max-width: 28rem; min-height: 100svh; margin-inline: auto; padding: max(14px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 1rem; }
+
+.langs { display: flex; justify-content: center; gap: .35rem; }
+.langs button { min-height: 44px; padding: 0 .95rem; border-radius: 999px; border: 2px solid rgba(243, 228, 208, .35); background: var(--choc); color: var(--on-choc); font-weight: 700; font-size: .9rem; cursor: pointer; }
+.langs button[aria-pressed="true"] { background: var(--cream); border-color: var(--cream); color: var(--cocoa); }
+
+.screen { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 1.1rem; }
+.eyebrow { align-self: center; font: 600 .9rem/1 var(--font-display); letter-spacing: .08em; text-transform: uppercase; padding: .55rem 1.1rem; border-radius: 999px; background: var(--cream); color: var(--brown); outline: 2px dashed var(--stitch); outline-offset: -5px; }
+h1 { margin: 0; text-align: center; font: 700 clamp(1.6rem, 7.4vw, 2.1rem)/1.12 var(--font-display); color: var(--cream); }
+.lead { margin: 0; text-align: center; font-weight: 700; font-size: 1.05rem; }
+.soft { margin: 0; text-align: center; color: var(--on-choc-muted); font-size: .95rem; }
+
+/* start screen */
+.roll { position: relative; align-self: center; width: 13.5rem; aspect-ratio: 1; display: grid; place-items: center; margin: .2rem 0; }
+.roll .ring { position: absolute; inset: 0; border-radius: 50%; background: var(--honey); box-shadow: 0 6px 0 var(--honey-dark), 0 18px 34px rgba(0, 0, 0, .4); }
+.roll .ring::after { content: ""; position: absolute; inset: 12px; border-radius: 50%; border: 3px dashed rgba(255, 246, 233, .75); }
+.roll img { position: relative; width: 74%; height: auto; transform: rotate(-6deg); filter: drop-shadow(0 8px 12px rgba(0, 0, 0, .35)); }
+.roll .count { position: absolute; right: -6px; bottom: 8px; display: grid; place-items: center; width: 4.6rem; height: 4.6rem; border-radius: 50%; background: var(--cream); color: var(--cocoa); text-align: center; box-shadow: 0 6px 16px rgba(0, 0, 0, .35); transform: rotate(8deg); }
+.roll .count b { display: block; font: 700 1.7rem/1 var(--font-display); }
+.roll .count span { display: block; font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }
+.card { background: var(--card); color: var(--cocoa); border-radius: 24px; padding: 1.3rem 1.2rem; display: grid; gap: .8rem; outline: 2px dashed var(--stitch); outline-offset: -9px; }
+.card label { font-weight: 800; }
+.card input { width: 100%; min-height: 52px; padding: .75rem .9rem; border: 2px solid var(--line); border-radius: 14px; background: var(--cream); color: var(--cocoa); font-weight: 600; font-size: 1.05rem; }
+::placeholder { color: #8C7465; opacity: 1; }
+.err { margin: 0; color: #A8432A; font-weight: 700; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 56px; padding: .7rem 1.2rem; border-radius: 16px; border: 0; cursor: pointer; font-weight: 800; font-size: 1.05rem; text-decoration: none; }
+.btn.honey { background: var(--honey); color: var(--on-honey); box-shadow: 0 5px 0 var(--honey-dark); }
+.btn.ghost { background: var(--choc); color: var(--on-choc); border: 2px solid rgba(243, 228, 208, .4); min-height: 50px; font-size: 1rem; }
+.btn.cream { background: var(--cream); color: var(--cocoa); }
+.btn[disabled] { opacity: .55; cursor: default; }
+.hint { margin: 0; padding: .75rem .9rem; border-radius: 14px; background: var(--tan); color: var(--cocoa); font-weight: 700; font-size: .92rem; line-height: 1.4; }
+.links { display: flex; justify-content: center; }
+.link { color: var(--on-choc); font-weight: 800; text-decoration: underline; text-underline-offset: 3px; padding: .5rem; }
+
+/* camera screen */
+.cam { justify-content: flex-start; gap: .8rem; }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.pill { display: inline-flex; align-items: center; gap: .4rem; min-height: 36px; padding: .35rem .8rem; border-radius: 999px; font-weight: 800; font-size: .9rem; white-space: nowrap; }
+.pill.left { background: var(--honey); color: var(--on-honey); font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
+.pill.sync { background: var(--choc-2); color: var(--on-choc-muted); }
+.pill.sync.ok { color: var(--ok); }
+.pill.sync.warn { color: var(--warn); }
+.finderwrap { flex: 1; min-height: 0; display: grid; place-items: center; }
+.finder { position: relative; border-radius: 22px; overflow: hidden; background: #000; box-shadow: 0 0 0 6px var(--cream), 0 14px 30px rgba(0, 0, 0, .45); width: 100%; aspect-ratio: 3 / 4; }
+.finder video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.finder video.mirror { transform: scaleX(-1); }
+.finder .flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+.finder .flash.go { animation: flash .35s ease-out; }
+@keyframes flash { 0% { opacity: .9; } 100% { opacity: 0; } }
+.finder .snapbox { position: absolute; inset: 0; display: grid; place-items: center; padding: 1.2rem; text-align: center; background: var(--choc-2); color: var(--on-choc); }
+.finder .snapbox p { margin: 0 0 .9rem; font-weight: 700; }
+.controls { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .6rem; padding-bottom: .2rem; }
+.thumb { justify-self: start; width: 58px; height: 58px; border-radius: 14px; border: 3px solid var(--cream); background: var(--choc-2) center / cover no-repeat; cursor: pointer; padding: 0; }
+.thumb:disabled { visibility: hidden; }
+.shutter { width: 84px; height: 84px; border-radius: 50%; border: 0; padding: 0; cursor: pointer; background: var(--cream); box-shadow: 0 0 0 6px var(--honey), 0 0 0 9px var(--honey-dark), 0 10px 22px rgba(0, 0, 0, .45); display: grid; place-items: center; transition: transform .08s; }
+.shutter:active { transform: scale(.94); }
+.shutter span { width: 62px; height: 62px; border-radius: 50%; border: 3px dashed var(--stitch); }
+.shutter:disabled { opacity: .5; cursor: default; }
+.flip { justify-self: end; width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(243, 228, 208, .4); background: var(--choc); color: var(--on-choc); display: grid; place-items: center; cursor: pointer; }
+.flip:disabled { visibility: hidden; }
+.who { margin: 0; text-align: center; color: var(--on-choc-muted); font-size: .9rem; }
+
+/* done */
+.done-art { align-self: center; width: 11rem; }
+.big { margin: 0; text-align: center; font: 700 3rem/1 var(--font-display); color: var(--honey); }
+
+/* last-shot viewer */
+.viewer { position: fixed; inset: 0; z-index: 20; background: rgba(24, 14, 10, .92); display: grid; place-items: center; padding: 1rem; }
+.viewer img { max-width: 100%; max-height: 78svh; border-radius: 14px; box-shadow: 0 0 0 5px var(--cream); }
+.viewer .btn { margin-top: 1rem; }
+.viewer > div { display: grid; justify-items: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { .finder .flash.go { animation: none; } }
+</style>
+</head>
+<body>
+<main class="shell">
+  <div class="langs" role="group" aria-label="Language">
+    <button type="button" data-lang="en" aria-pressed="true">English</button>
+    <button type="button" data-lang="ceb" aria-pressed="false">Bisaya</button>
+    <button type="button" data-lang="tl" aria-pressed="false">Tagalog</button>
+  </div>
+
+  <!-- 1. Start -->
+  <section class="screen" id="sStart">
+    <span class="eyebrow">Euri's Party Camera</span>
+    <div class="roll" aria-hidden="true">
+      <span class="ring"></span>
+      <img src="../euri-sticker-2.webp" alt="" width="252" height="314">
+      <span class="count"><b id="leftBig">20</b><span data-t="shots">shots</span></span>
+    </div>
+    <h1 data-t="title">Snap the party for Euri!</h1>
+    <p class="lead" data-t="lead">You get 20 shots. They go straight to our album, so make them count 🧸</p>
+    <p class="soft" data-t="optional">Optional, but it would make us so happy 😙</p>
+    <form class="card" id="startForm" novalidate>
+      <label for="guestName" data-t="nameLabel">Your name (so we know who took it)</label>
+      <input id="guestName" type="text" autocomplete="name" maxlength="40" placeholder="e.g. Tita Rika" data-ph="namePh">
+      <p class="err" id="startErr" role="alert" hidden></p>
+      <button class="btn honey" type="submit" id="startBtn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <span data-t="start">Open the camera</span>
+      </button>
+      <p class="soft" style="color: var(--muted)" data-t="permHint">Your phone will ask to use the camera. Tap Allow.</p>
+    </form>
+    <p class="hint" id="inAppHint" hidden data-t="inApp">Inside Messenger? Tap ⋮ and choose “Open in browser” so the camera works.</p>
+    <p class="soft" data-t="needs">Needs mobile data or Wi-Fi · Works best in Chrome or Safari</p>
+  </section>
+
+  <!-- 2. Camera -->
+  <section class="screen cam" id="sCam" hidden>
+    <div class="topbar">
+      <span class="pill left" id="leftPill">20 shots left</span>
+      <span class="pill sync" id="syncPill" aria-live="polite"></span>
+    </div>
+    <div class="finderwrap" id="finderWrap">
+      <div class="finder" id="finder">
+        <video id="video" playsinline muted autoplay></video>
+        <div class="snapbox" id="snapBox" hidden>
+          <div>
+            <p data-t="noCamText">No problem, use your phone's own camera instead. Photos still go to the album.</p>
+            <button type="button" class="btn honey" id="pickBtn"><span data-t="usePhone">Use my phone's camera</span></button>
+          </div>
+        </div>
+        <div class="flash" id="flash"></div>
+      </div>
+    </div>
+    <div class="controls">
+      <button type="button" class="thumb" id="thumb" disabled aria-label="See the last photo"></button>
+      <button type="button" class="shutter" id="shutter" aria-label="Take a photo" data-aria="shutterAria"><span></span></button>
+      <button type="button" class="flip" id="flip" aria-label="Switch camera" data-aria="flip">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><path d="M9.5 12.5a2.7 2.7 0 0 1 4.8-1.2M14.5 14a2.7 2.7 0 0 1-4.8 1.2M14.6 9.8v1.7h-1.7M9.4 16.2v-1.7h1.7"/></svg>
+      </button>
+    </div>
+    <p class="who" id="who"></p>
+    <input type="file" id="fileIn" accept="image/*" capture="environment" hidden>
+  </section>
+
+  <!-- 3. Camera could not open -->
+  <section class="screen" id="sNoCam" hidden>
+    <span class="eyebrow">Euri's Party Camera</span>
+    <h1 data-t="noCamTitle">The camera didn't open</h1>
+    <p class="hint" id="noCamWhy"></p>
+    <button type="button" class="btn honey" id="usePhoneBtn"><span data-t="usePhone">Use my phone's camera</span></button>
+    <button type="button" class="btn ghost" id="retryBtn"><span data-t="retry">Try again</span></button>
+  </section>
+
+  <!-- 4. Out of film -->
+  <section class="screen" id="sDone" hidden>
+    <img class="done-art" src="../euri-sticker-5.webp" alt="" width="268" height="315">
+    <h1 data-t="doneTitle">That's a wrap! 🧸</h1>
+    <p class="lead" data-t="doneText">You used all 20 shots. Thank you for the memories!</p>
+    <p class="hint" id="doneSync"></p>
+    <a class="btn honey" id="albumBtn2" href="#" target="_blank" rel="noopener"><span data-t="album">See the album</span></a>
+  </section>
+
+  <div class="links" id="albumRow"><a class="link" id="albumLink" href="#" target="_blank" rel="noopener" data-t="album">See the album</a></div>
+</main>
+
+<div class="viewer" id="viewer" hidden role="dialog" aria-modal="true" aria-label="Last photo">
+  <div><img id="viewerImg" alt=""><button type="button" class="btn cream" id="viewerClose"><span data-t="close">Close</span></button></div>
+</div>
+
+<script>
+(function () {
+  // Google Apps Script web app that saves each photo into the "Euri's Party Camera" Drive folder.
+  var CAM_URL = 'PASTE_CAMERA_WEB_APP_URL';
+  var ALBUM_URL = 'https://drive.google.com/drive/folders/1YYGMdZ_GCDQEcPdT_epl7_5-1dhlusWS';
+  var SHOTS = 20;           // per phone
+  var MAX_SIDE = 1600;      // photos are shrunk to this many pixels on the long side (~300 KB) before sending
+  var QUALITY = 0.85;
+
+  // ---------- words ----------
+  var T = {
+    en: {
+      shots: 'shots', title: 'Snap the party for Euri!', lead: 'You get 20 shots. They go straight to our album, so make them count 🧸',
+      optional: 'Optional, but it would make us so happy 😙', nameLabel: 'Your name (so we know who took it)', namePh: 'e.g. Tita Rika',
+      start: 'Open the camera', permHint: 'Your phone will ask to use the camera. Tap Allow.',
+      inApp: 'Inside Messenger or Facebook? Tap ⋮ and choose “Open in browser” so the camera works.',
+      needs: 'Needs mobile data or Wi-Fi · Works best in Chrome or Safari', needName: 'Please type your name first.',
+      left: '{n} shots left', left1: '1 shot left', saving: 'Saving {n}…', saved: 'All saved ✓', waiting: 'Waiting for signal ({n})',
+      shutterAria: 'Take a photo', flip: 'Switch camera', who: 'Taking photos as {name}',
+      noCamTitle: "The camera didn't open", noCamText: "No problem, use your phone's own camera instead. Photos still go to the album.",
+      denied: 'Camera access was blocked. To allow it, tap the 🔒 or ⓘ next to the web address, turn Camera on, then tap Try again.',
+      noSupport: "This browser can't open the camera here. Use your phone's camera instead, or open the link in Chrome or Safari.",
+      usePhone: "Use my phone's camera", retry: 'Try again',
+      doneTitle: "That's a wrap! 🧸", doneText: 'You used all 20 shots. Thank you for the memories!',
+      keepOpen: 'Keep this page open until it says “All saved”. Saving {n}…', allSavedDone: 'All your photos are in the album ✓',
+      waitingDone: 'No signal right now. {n} photos will send when you are back online, just keep this page open.',
+      album: 'See the album', close: 'Close'
+    },
+    ceb: {
+      shots: 'ka kuha', title: 'Kuhai og litrato ang party ni Euri!', lead: 'Naa kay 20 ka kuha. Diretso ra sa among album, pili-a ang nindot 🧸',
+      optional: 'Optional ra ni, pero malipay jud mi kung buhaton nimo 😙', nameLabel: 'Imong ngalan (para kahibalo mi kinsay nagkuha)', namePh: 'pananglit, Tita Rika',
+      start: 'Ablihi ang camera', permHint: 'Mangutana imong phone kung pwede gamiton ang camera. I-tap ang Allow.',
+      inApp: 'Naa ka sa Messenger o Facebook? I-tap ang ⋮ ug pilia ang “Open in browser” para mugana ang camera.',
+      needs: 'Kinahanglan og mobile data o Wi-Fi · Mas maayo sa Chrome o Safari', needName: 'Palihug isulat una imong ngalan.',
+      left: '{n} ka kuha nalang', left1: '1 ka kuha nalang', saving: 'Gi-save pa ang {n}…', saved: 'Na-save na tanan ✓', waiting: 'Naghulat og signal ({n})',
+      shutterAria: 'Kuha og litrato', flip: 'Ilisi ang camera', who: 'Nagkuha isip {name}',
+      noCamTitle: 'Wala naabli ang camera', noCamText: 'Okay ra, gamita lang ang camera sa imong phone. Mapadala gihapon sa album ang litrato.',
+      denied: 'Gi-block ang camera. Para i-allow, i-tap ang 🔒 o ⓘ tapad sa web address, i-on ang Camera, dayon i-tap ang Sulayi balik.',
+      noSupport: 'Dili maabli ang camera sa kini nga browser. Gamita lang ang camera sa imong phone, o ablihi ang link sa Chrome o Safari.',
+      usePhone: 'Gamita ang camera sa akong phone', retry: 'Sulayi balik',
+      doneTitle: 'Human na! 🧸', doneText: 'Nagamit na nimo ang 20 ka kuha. Salamat sa mga memories!',
+      keepOpen: 'Ayaw sa i-close ning page hangtod mogawas ang “Na-save na tanan”. Gi-save pa ang {n}…', allSavedDone: 'Naa na sa album tanan nimong litrato ✓',
+      waitingDone: 'Walay signal karon. Mapadala ang {n} ka litrato inig balik sa signal, basta ayaw sa i-close ning page.',
+      album: 'Tan-awa ang album', close: 'Isira'
+    },
+    tl: {
+      shots: 'kuha', title: 'Kuhanan ng litrato ang party ni Euri!', lead: 'May 20 kuha ka. Diretso sa album namin, kaya piliin ang magaganda 🧸',
+      optional: 'Opsyonal lang, pero matutuwa talaga kami 😙', nameLabel: 'Pangalan mo (para alam namin kung sino ang kumuha)', namePh: 'halimbawa: Tita Rika',
+      start: 'Buksan ang camera', permHint: 'Magtatanong ang phone mo kung puwedeng gamitin ang camera. I-tap ang Allow.',
+      inApp: 'Nasa Messenger o Facebook ka? I-tap ang ⋮ at piliin ang “Open in browser” para gumana ang camera.',
+      needs: 'Kailangan ng mobile data o Wi-Fi · Mas maayos sa Chrome o Safari', needName: 'Pakisulat muna ang pangalan mo.',
+      left: '{n} kuha na lang', left1: '1 kuha na lang', saving: 'Sine-save ang {n}…', saved: 'Na-save na lahat ✓', waiting: 'Naghihintay ng signal ({n})',
+      shutterAria: 'Kumuha ng litrato', flip: 'Palitan ang camera', who: 'Kumukuha bilang {name}',
+      noCamTitle: 'Hindi bumukas ang camera', noCamText: 'Okay lang, gamitin ang sariling camera ng phone mo. Mapupunta pa rin sa album ang litrato.',
+      denied: 'Na-block ang camera. Para payagan, i-tap ang 🔒 o ⓘ sa tabi ng web address, i-on ang Camera, saka i-tap ang Subukan ulit.',
+      noSupport: 'Hindi mabuksan ang camera sa browser na ito. Gamitin ang camera ng phone mo, o buksan ang link sa Chrome o Safari.',
+      usePhone: 'Gamitin ang camera ng phone ko', retry: 'Subukan ulit',
+      doneTitle: 'Tapos na! 🧸', doneText: 'Nagamit mo na ang 20 kuha. Salamat sa mga alaala!',
+      keepOpen: 'Huwag munang isara ang page hangga’t hindi lumalabas ang “Na-save na lahat”. Sine-save ang {n}…', allSavedDone: 'Nasa album na lahat ng litrato mo ✓',
+      waitingDone: 'Walang signal ngayon. Ipapadala ang {n} litrato pagbalik ng signal, huwag lang isara ang page.',
+      album: 'Tingnan ang album', close: 'Isara'
+    }
+  };
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+  var lang = T[store('euri-lang')] ? store('euri-lang') : 'en';   // same setting as the invite
+  function t(k, vars) {
+    var s = T[lang][k] || T.en[k] || '';
+    if (vars) Object.keys(vars).forEach(function (v) { s = s.split('{' + v + '}').join(vars[v]); });
+    return s;
+  }
+  var $ = function (id) { return document.getElementById(id); };
+  function applyLang() {
+    document.documentElement.lang = lang === 'ceb' ? 'ceb' : lang;
+    document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = t(el.getAttribute('data-t')); });
+    document.querySelectorAll('[data-ph]').forEach(function (el) { el.placeholder = t(el.getAttribute('data-ph')); });
+    document.querySelectorAll('[data-aria]').forEach(function (el) { el.setAttribute('aria-label', t(el.getAttribute('data-aria'))); });
+    document.querySelectorAll('.langs button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    paintCount(); paintSync(); paintWho(); if (whyKey) $('noCamWhy').textContent = t(whyKey);
+  }
+  document.querySelectorAll('.langs button').forEach(function (b) {
+    b.addEventListener('click', function () { lang = b.getAttribute('data-lang'); store('euri-lang', lang); applyLang(); });
+  });
+  ['albumLink', 'albumBtn2'].forEach(function (id) { $(id).href = ALBUM_URL; });
+
+  // ---------- state ----------
+  var used = Math.min(SHOTS, parseInt(store('euri-cam-used'), 10) || 0);
+  var guest = store('euri-cam-name') || '';
+  if (!guest) { try { var r = JSON.parse(store('euri-rsvp') || 'null'); if (r && r.name) guest = r.name; } catch (e) {} }   // their RSVP name, if they replied on this phone
+  $('guestName').value = guest;
+  function left() { return SHOTS - used; }
+
+  var screens = ['sStart', 'sCam', 'sNoCam', 'sDone'];
+  function show(id) {
+    screens.forEach(function (s) { $(s).hidden = s !== id; });
+    $('albumRow').hidden = id === 'sDone';
+    if (id === 'sCam') sizeFinder();
+  }
+  function paintCount() {
+    $('leftBig').textContent = left();
+    $('leftPill').textContent = left() === 1 ? t('left1') : t('left', { n: left() });
+    $('shutter').disabled = left() <= 0;
+  }
+  function paintWho() { $('who').textContent = guest ? t('who', { name: guest }) : ''; }
+
+  // ---------- upload queue: kept on the phone until the album has it ----------
+  var db = null, pending = 0, sending = false, online = navigator.onLine !== false, retryTimer = 0, backoff = 2000;
+  function openDb() {
+    return new Promise(function (res) {
+      if (!window.indexedDB) return res(null);
+      try {
+        var rq = indexedDB.open('euri-cam', 1);
+        rq.onupgradeneeded = function () { rq.result.createObjectStore('q', { keyPath: 'id' }); };
+        rq.onsuccess = function () { res(rq.result); };
+        rq.onerror = function () { res(null); };
+      } catch (e) { res(null); }
+    });
+  }
+  var memQueue = [];   // fallback when the browser has no IndexedDB (private mode)
+  function qAll() {
+    if (!db) return Promise.resolve(memQueue.slice());
+    return new Promise(function (res) {
+      var out = [], tx = db.transaction('q', 'readonly');
+      tx.objectStore('q').openCursor().onsuccess = function (e) { var c = e.target.result; if (c) { out.push(c.value); c.continue(); } else res(out); };
+      tx.onerror = function () { res(out); };
+    });
+  }
+  function qPut(item) {
+    if (!db) { memQueue.push(item); return Promise.resolve(); }
+    return new Promise(function (res) { var tx = db.transaction('q', 'readwrite'); tx.objectStore('q').put(item); tx.oncomplete = res; tx.onerror = res; });
+  }
+  function qDel(id) {
+    if (!db) { memQueue = memQueue.filter(function (i) { return i.id !== id; }); return Promise.resolve(); }
+    return new Promise(function (res) { var tx = db.transaction('q', 'readwrite'); tx.objectStore('q').delete(id); tx.oncomplete = res; tx.onerror = res; });
+  }
+  function paintSync() {
+    var p = $('syncPill');
+    p.classList.remove('ok', 'warn');
+    if (pending === 0) { p.textContent = used ? t('saved') : ''; p.classList.add('ok'); }
+    else if (!online) { p.textContent = t('waiting', { n: pending }); p.classList.add('warn'); }
+    else p.textContent = t('saving', { n: pending });
+    $('doneSync').textContent = pending === 0 ? t('allSavedDone') : (online ? t('keepOpen', { n: pending }) : t('waitingDone', { n: pending }));
+  }
+  function send(item) {
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 45000) : 0;
+    return fetch(CAM_URL, { method: 'POST', body: JSON.stringify({ id: item.id, name: item.name, n: item.n, data: item.data }), signal: ctrl ? ctrl.signal : undefined })
+      .then(function (r) { clearTimeout(timer); return r.json(); })
+      .then(function (j) { if (!j || !j.ok) throw new Error((j && j.error) || 'not saved'); });
+  }
+  function drain() {   // one photo at a time, oldest first, until the queue is empty (new shots join as they come)
+    if (sending) return;
+    clearTimeout(retryTimer);
+    sending = true;
+    (function next() {
+      qAll().then(function (items) {
+        pending = items.length; paintSync();
+        if (!items.length) { sending = false; return; }
+        items.sort(function (a, b) { return a.n - b.n; });
+        var it = items[0];
+        return send(it).then(function () {
+          backoff = 2000; online = true;
+          return qDel(it.id).then(next);
+        });
+      }).catch(function () {
+        sending = false; online = false; paintSync();
+        retryTimer = setTimeout(drain, backoff);   // no signal or the album didn't answer: try again shortly
+        backoff = Math.min(backoff * 2, 30000);
+      });
+    })();
+  }
+  window.addEventListener('online', function () { online = true; backoff = 2000; drain(); });
+  window.addEventListener('offline', function () { online = false; paintSync(); });
+  window.addEventListener('beforeunload', function (e) { if (pending > 0) { e.preventDefault(); e.returnValue = ''; } });
+
+  // ---------- photos ----------
+  function toJpeg(source, w, h, mirror) {
+    var s = Math.min(1, MAX_SIDE / Math.max(w, h));
+    var c = document.createElement('canvas');
+    c.width = Math.round(w * s); c.height = Math.round(h * s);
+    var g = c.getContext('2d');
+    if (mirror) { g.translate(c.width, 0); g.scale(-1, 1); }
+    g.drawImage(source, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', QUALITY);   // re-drawing also drops the phone's location data from the photo
+  }
+  function keep(dataUrl) {
+    if (left() <= 0) return;
+    used++;
+    store('euri-cam-used', String(used));
+    var item = { id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8), name: guest, n: used, data: dataUrl };
+    $('thumb').style.backgroundImage = 'url(' + dataUrl + ')';
+    $('thumb').disabled = false;
+    $('viewerImg').src = dataUrl;
+    paintCount();
+    pending++; paintSync();
+    qPut(item).then(drain);
+    if (left() <= 0) setTimeout(finish, 900);
+  }
+  function flash() {
+    var f = $('flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
+    if (navigator.vibrate) { try { navigator.vibrate(30); } catch (e) {} }
+  }
+
+  // ---------- camera ----------
+  var stream = null, facing = 'environment', fileMode = false, whyKey = '';
+  var video = $('video');
+  function stopCam() { if (stream) { stream.getTracks().forEach(function (tr) { tr.stop(); }); stream = null; } }
+  function startCam() {
+    stopCam();
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return Promise.reject({ name: 'NoSupport' });
+    return navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: facing }, width: { ideal: 1920 }, height: { ideal: 1920 } } })
+      .then(function (s) {
+        stream = s; video.srcObject = s;
+        video.classList.toggle('mirror', facing === 'user');
+        return video.play().catch(function () {});
+      });
+  }
+  function sizeFinder() {
+    var wrap = $('finderWrap'), f = $('finder');
+    var ar = (video.videoWidth && video.videoHeight) ? video.videoWidth / video.videoHeight : 3 / 4;
+    if (fileMode) ar = 3 / 4;
+    var W = wrap.clientWidth, H = Math.max(200, wrap.clientHeight);
+    var w = Math.min(W, H * ar);
+    f.style.width = Math.round(w) + 'px';
+    f.style.aspectRatio = String(ar);
+  }
+  video.addEventListener('loadedmetadata', sizeFinder);
+  window.addEventListener('resize', sizeFinder);
+  function openCamera() {
+    show('sCam');
+    $('snapBox').hidden = true; fileMode = false;
+    startCam().then(function () {
+      $('flip').disabled = false;
+      sizeFinder();
+    }, function (err) {
+      whyKey = err && (err.name === 'NotAllowedError' || err.name === 'SecurityError') ? 'denied' : 'noSupport';
+      $('noCamWhy').textContent = t(whyKey);
+      show('sNoCam');
+    });
+  }
+  function useFileMode() {
+    stopCam(); fileMode = true;
+    show('sCam');
+    $('snapBox').hidden = false; $('flip').disabled = true;
+    sizeFinder();
+  }
+  function finish() { stopCam(); show('sDone'); paintSync(); }
+
+  $('startForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var n = $('guestName').value.replace(/\s+/g, ' ').trim();
+    if (!n) { $('startErr').textContent = t('needName'); $('startErr').hidden = false; $('guestName').focus(); return; }
+    if (CAM_URL.indexOf('/exec') < 0) { $('startErr').textContent = 'The camera opens on party day 🧸'; $('startErr').hidden = false; return; }   // not connected to the album yet
+    $('startErr').hidden = true;
+    guest = n; store('euri-cam-name', n); paintWho();
+    if (left() <= 0) return finish();
+    openCamera();
+  });
+  $('shutter').addEventListener('click', function () {
+    if (left() <= 0) return;
+    if (fileMode) return $('fileIn').click();
+    if (!video.videoWidth) return;
+    flash();
+    keep(toJpeg(video, video.videoWidth, video.videoHeight, facing === 'user'));
+  });
+  $('flip').addEventListener('click', function () {
+    facing = facing === 'environment' ? 'user' : 'environment';
+    startCam().catch(function () { facing = facing === 'environment' ? 'user' : 'environment'; startCam().catch(function () {}); });
+  });
+  $('pickBtn').addEventListener('click', function () { $('fileIn').click(); });
+  $('usePhoneBtn').addEventListener('click', useFileMode);
+  $('retryBtn').addEventListener('click', openCamera);
+  $('fileIn').addEventListener('change', function () {
+    var file = this.files && this.files[0];
+    this.value = '';
+    if (!file || left() <= 0) return;
+    var done = function (src, w, h) { keep(toJpeg(src, w, h, false)); };
+    if (window.createImageBitmap) {
+      createImageBitmap(file, { imageOrientation: 'from-image' }).then(function (bm) { done(bm, bm.width, bm.height); }, fallbackImg);
+    } else fallbackImg();
+    function fallbackImg() {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () { done(img, img.naturalWidth, img.naturalHeight); URL.revokeObjectURL(url); };
+      img.src = url;
+    }
+  });
+  $('thumb').addEventListener('click', function () { $('viewer').hidden = false; $('viewerClose').focus(); });
+  $('viewerClose').addEventListener('click', function () { $('viewer').hidden = true; });
+  $('viewer').addEventListener('click', function (e) { if (e.target === this) this.hidden = true; });
+  document.addEventListener('visibilitychange', function () {
+    // free the camera while the page is in the background; turn it back on when they return
+    if (document.hidden) stopCam();
+    else if (!$('sCam').hidden && !fileMode && left() > 0) startCam().catch(function () {});
+  });
+
+  // Messenger / Facebook / Instagram's built-in browsers often block the camera: say so up front.
+  if (/FBAN|FBAV|FB_IAB|Messenger|Instagram|Line\/|TikTok/i.test(navigator.userAgent || '')) $('inAppHint').hidden = false;
+
+  openDb().then(function (d) { db = d; return qAll(); }).then(function (items) {
+    pending = items.length; paintSync();
+    if (pending) drain();   // photos left over from last time (no signal then) go now
+  });
+  applyLang();
+  if (left() <= 0) finish();
+})();
+</script>
+</body>
+</html>
