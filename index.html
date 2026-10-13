@@ -273,9 +273,61 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
   .s4 { right: calc(50% - 14rem - 150px); top: 52%; }
   .s5 { left: calc(50% - 14rem - 175px); top: 74%; bottom: auto; }
 }
+/* Gift QR, only after a "Sorry, I can't" reply: Euri (looking down) holds a QR sign and floats
+   around above the page. It is laid out at its full "opened" size and shrunk with a transform
+   while it floats, so the QR is sharp once a tap parks it in the middle. */
+.gift {
+  position: fixed; left: 0; top: 0; z-index: 6; width: 320px; height: 548px; transform-origin: 0 0;
+  pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.gift > * { pointer-events: auto; cursor: pointer; }
+.gift.open > * { pointer-events: none; }   /* opened: a tap anywhere but the QR closes it */
+.gift.open .gift-qr { pointer-events: auto; cursor: default; }
+.gift:focus-visible { outline: none !important; }
+.gift:focus-visible .gift-sign { outline: 4px solid var(--cream); outline-offset: 4px; }
+.gift-euri { position: absolute; left: 10px; top: 0; width: 300px; height: auto; -webkit-user-drag: none; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .35)); }
+.gift-sign {
+  position: absolute; left: 22px; top: 238px; width: 276px; padding: 18px 18px 12px; border-radius: 24px;
+  display: grid; justify-items: center; gap: 8px; background: var(--honey); transform: rotate(-4deg); transition: transform .5s;
+  box-shadow: 0 6px 0 var(--honey-dark), 0 18px 30px rgba(0, 0, 0, .35);
+}
+.gift.open .gift-sign { transform: none; }   /* straightens up once parked, so it scans easily */
+.gift-sign::before { content: ""; position: absolute; inset: 7px; border: 3px dashed rgba(255, 246, 233, .8); border-radius: 18px; pointer-events: none; }
+.gift-qr { position: relative; display: block; width: 240px; height: 240px; border-radius: 12px; background: #FFF8EE; -webkit-user-drag: none; }
+.gift.open .gift-qr { -webkit-touch-callout: default; user-select: auto; -webkit-user-select: auto; }
+.gift-tag { position: relative; font: 700 22px/1 var(--font-display); color: var(--on-honey); }
+.gift-tape { position: absolute; top: -11px; width: 76px; height: 26px; background: rgba(255, 246, 233, .82); box-shadow: 0 1px 3px rgba(0, 0, 0, .2); }
+.gift-tape.l { left: 10px; transform: rotate(-11deg); }
+.gift-tape.r { right: 10px; transform: rotate(9deg); }
+.gift-bubble {
+  position: absolute; right: -4px; top: 14px; max-width: 176px; padding: 12px 16px; border-radius: 24px;
+  background: var(--cream); color: var(--cocoa); font: 700 31px/1.06 var(--font-display); text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .3); transform: rotate(7deg);
+}
+.gift-bubble::after { content: ""; position: absolute; left: 6px; bottom: -14px; border: 16px solid transparent; border-top-color: var(--cream); border-bottom: 0; transform: rotate(32deg); }
+.gift.open { z-index: 21; }
+.gift-shade {
+  position: fixed; inset: 0; z-index: 20; background: rgba(24, 14, 10, .9); opacity: 0; transition: opacity .35s;
+  -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+}
+.gift-shade.on { opacity: 1; }
+.gift-panel {
+  position: fixed; left: 50%; top: 0; z-index: 22; width: min(calc(100vw - 32px), 22rem); display: grid; gap: .45rem;
+  text-align: center; color: var(--on-choc); opacity: 0; transform: translate(-50%, 14px); transition: opacity .3s .2s, transform .3s .2s;
+}
+.gift-panel.on { opacity: 1; transform: translate(-50%, 0); }
+.gift-panel h2 { margin: 0; font: 700 1.35rem/1.2 var(--font-display); color: var(--cream); text-wrap: balance; }
+.gift-panel p { margin: 0; font-weight: 700; }
+.gift-panel .gift-how { font-weight: 600; font-size: .9rem; line-height: 1.4; color: var(--on-choc-muted); }
+.gift-acts { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: .35rem; }
+.gift-acts .btn { min-height: 50px; }
+.gift-acts .btn.honey { min-height: 50px; font-size: 1rem; box-shadow: 0 4px 0 var(--honey-dark); }
+html.gift-lock, html.gift-lock body { overflow: hidden; }
+/* with animations turned off, Euri doesn't float: he stands still in this spot in the reply box */
+.gift-spot { justify-self: center; width: 109px; height: 187px; margin: .4rem 0 .2rem; }
 @media (prefers-reduced-motion: reduce) {
   .screen.from-right, .screen.from-left, .pg-btn.fwd.nudge svg { animation: none; }
-  .dots span, .art .hint, .art video.over { transition: none; }
+  .dots span, .art .hint, .art video.over, .gift-shade, .gift-panel { transition: none; }
 }
 </style>
 </head>
@@ -416,6 +468,7 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
       <div class="done" id="done" hidden>
         <p><b id="doneTitle"></b></p>
         <p id="doneText"></p>
+        <div class="gift-spot" id="giftSpot" aria-hidden="true" hidden></div>
         <div class="cal" id="calGoing" hidden>
           <p data-t="calTitle">Add it to your calendar</p>
           <div class="cal-btns"><a class="cal-btn" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Euri+Quinn%27s+1st+Birthday&amp;dates=20261021T040000Z%2F20261021T080000Z&amp;details=Teddy+bear+theme.+Resort+entrance+fee%3A+PHP+100+per+person+%28kids+2+ft+and+below+free%29%2C+please+bring+your+own.+Map%3A+https%3A%2F%2Fmaps.app.goo.gl%2FkDxDsRqXwA4XVtbm7+Invite%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F&amp;location=RR+Family+Spring+Resort%2C+Purok+3%2C+Tubigon%2C+Maramag%2C+Bukidnon+8714" data-gcal="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Euri+Quinn%27s+1st+Birthday&amp;dates=20261021T040000Z%2F20261021T080000Z&amp;details=Teddy+bear+theme.+Resort+entrance+fee%3A+PHP+100+per+person+%28kids+2+ft+and+below+free%29%2C+please+bring+your+own.+Map%3A+https%3A%2F%2Fmaps.app.goo.gl%2FkDxDsRqXwA4XVtbm7+Invite%3A+https%3A%2F%2Fislawqt.github.io%2Feuri%2F&amp;location=RR+Family+Spring+Resort%2C+Purok+3%2C+Tubigon%2C+Maramag%2C+Bukidnon+8714" data-ics="euri-birthday.ics" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M12 13v5M9.5 15.5h5"/></svg><span data-t="calAdd">Add to my calendar</span></a></div><small class="cal-hint" hidden data-t="calHint">If nothing opens, tap the ⋮ or share menu and choose “Open in browser”.</small>
@@ -433,20 +486,20 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
     <div class="contact" aria-label="Contact">
       <p data-t="questions">Questions? Text or call us.</p>
       <div class="person">
-        <b class="couple">Mr. &amp; Mrs. Siapoc</b>
+        <b class="couple">Dada Julius &amp; Mama Mae</b>
         <div class="actions">
           <button type="button" class="btn ghost" id="textBtn" aria-expanded="false" aria-controls="pickText"><span data-t="text">Text</span></button>
           <button type="button" class="btn ghost" id="callBtn" aria-expanded="false" aria-controls="pickCall"><span data-t="call">Call</span></button>
         </div>
         <div class="pick" id="pickText" hidden>
           <p data-t="whoText">Who do you want to text?</p>
-          <a class="pick-btn" href="sms:+639851996465"><b>Mr. Siapoc</b><span>+63 985 199 6465</span></a>
-          <a class="pick-btn" href="sms:+639481464334"><b>Mrs. Siapoc</b><span>+63 948 146 4334</span></a>
+          <a class="pick-btn" href="sms:+639851996465"><b>Dada Julius</b><span>+63 985 199 6465</span></a>
+          <a class="pick-btn" href="sms:+639481464334"><b>Mama Mae</b><span>+63 948 146 4334</span></a>
         </div>
         <div class="pick" id="pickCall" hidden>
           <p data-t="whoCall">Who do you want to call?</p>
-          <a class="pick-btn" href="tel:+639851996465"><b>Mr. Siapoc</b><span>+63 985 199 6465</span></a>
-          <a class="pick-btn" href="tel:+639481464334"><b>Mrs. Siapoc</b><span>+63 948 146 4334</span></a>
+          <a class="pick-btn" href="tel:+639851996465"><b>Dada Julius</b><span>+63 985 199 6465</span></a>
+          <a class="pick-btn" href="tel:+639481464334"><b>Mama Mae</b><span>+63 948 146 4334</span></a>
         </div>
       </div>
     </div>
@@ -471,6 +524,27 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
     <p class="sr-only" id="stepLabel" aria-live="polite"></p>
   </nav>
 </main>
+
+<!-- Gift QR (InstaPay), shown only after a "Sorry, I can't" reply is saved -->
+<div class="gift-shade" id="giftShade" hidden></div>
+<div class="gift" id="gift" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="giftPanel" aria-label="Euri is hiding something. Tap to see." hidden>
+  <img class="gift-euri" src="euri-carry.webp" alt="" width="574" height="740" loading="lazy" decoding="async">
+  <span class="gift-sign">
+    <span class="gift-tape l" aria-hidden="true"></span><span class="gift-tape r" aria-hidden="true"></span>
+    <img class="gift-qr" src="euri-gift-qr.png" alt="InstaPay QR code for a gift to Euri" width="966" height="966" loading="lazy" decoding="async">
+    <span class="gift-tag" aria-hidden="true">InstaPay</span>
+  </span>
+  <span class="gift-bubble" id="giftBubble" aria-hidden="true">nothing to see here 👀</span>
+</div>
+<div class="gift-panel" id="giftPanel" role="dialog" aria-modal="true" aria-labelledby="giftTitle" hidden>
+  <h2 id="giftTitle" tabindex="-1" data-t="giftTitle">A little gift for Euri? 🧸</h2>
+  <p data-t="giftText">Totally optional, no pressure at all 💛</p>
+  <p class="gift-how" data-t="giftHow">Screenshot or save this QR, then in GCash, Maya or any bank app: Scan QR → Upload / Gallery.</p>
+  <div class="gift-acts">
+    <a class="btn honey" id="giftSave" href="euri-gift-qr.png" download="Euri-gift-QR.png" data-t="giftSave">Save QR</a>
+    <button type="button" class="btn ghost" id="giftClose" data-t="giftClose">Close</button>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -510,7 +584,11 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
       remindNote: 'Sunday, October 18 at 9 AM, the last day to reply. Your phone will ask before adding it.',
       change: 'Change my reply', closedTitle: 'Replies are closed', closedLead: 'Replies closed on Sunday, October 18. Thank you to everyone who answered!',
       questions: 'Questions? Text or call us.', whoText: 'Who do you want to text?', whoCall: 'Who do you want to call?', text: 'Text', call: 'Call', save: 'Save contact',
-      seeYou: 'See you there!', family: 'The Libres family'
+      seeYou: 'See you there!', family: 'The Libres family',
+      giftPeek: 'nothing to see here 👀', giftCaught: 'you caught me 🙈', giftAria: 'Euri is hiding something. Tap to see.',
+      giftTitle: 'A little gift for Euri? 🧸', giftText: 'Totally optional, no pressure at all 💛',
+      giftHow: 'Screenshot or save this QR, then in GCash, Maya or any bank app: Scan QR → Upload / Gallery.',
+      giftSave: 'Save QR', giftClose: 'Close'
     },
     ceb: {
       eyebrow: 'Imbitado ka!', first: 'Unang Birthday', tapHint: 'I-tap si Euri para madunggan siya',
@@ -538,7 +616,11 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
       remindNote: 'Domingo, Oktubre 18, alas 9 sa buntag, ang katapusang adlaw sa pagtubag. Mangutana una imong phone sa dili pa i-add.',
       change: 'Usba akong tubag', closedTitle: 'Sirado na ang tubag', closedLead: 'Nasirado na ang tubag niadtong Domingo, Oktubre 18. Salamat sa tanan nga ni-tubag!',
       questions: 'Naa kay pangutana? I-text o tawagi mi.', whoText: 'Kinsa imong i-text?', whoCall: 'Kinsa imong tawagan?', text: 'Text', call: 'Tawag', save: 'I-save ang contact',
-      seeYou: 'Kita-kits!', family: 'Pamilya Libres'
+      seeYou: 'Kita-kits!', family: 'Pamilya Libres',
+      giftPeek: 'wala kay nakita 👀', giftCaught: 'hala, nadakpan ko 🙈', giftAria: 'Naay gitago si Euri. I-tap para makita.',
+      giftTitle: 'Gamay nga regalo para kay Euri? 🧸', giftText: 'Kung gusto lang ha, walay pugos 💛',
+      giftHow: 'I-screenshot o i-save ang QR, dayon sa GCash, Maya o bisan unsang bank app: Scan QR → Upload / Gallery.',
+      giftSave: 'I-save ang QR', giftClose: 'Isira'
     },
     tl: {
       eyebrow: 'Imbitado ka!', first: 'Unang Kaarawan', tapHint: 'I-tap si Euri para marinig siya',
@@ -566,7 +648,11 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
       remindNote: 'Linggo, Oktubre 18, 9 ng umaga, ang huling araw ng pagsagot. Magtatanong muna ang phone mo bago ito idagdag.',
       change: 'Palitan ang sagot ko', closedTitle: 'Sarado na ang pagsagot', closedLead: 'Nagsara na ang pagsagot noong Linggo, Oktubre 18. Salamat sa lahat ng sumagot!',
       questions: 'May tanong? I-text o tawagan kami.', whoText: 'Sino ang ite-text mo?', whoCall: 'Sino ang tatawagan mo?', text: 'Text', call: 'Tawag', save: 'I-save ang contact',
-      seeYou: 'Kita-kits!', family: 'Pamilya Libres'
+      seeYou: 'Kita-kits!', family: 'Pamilya Libres',
+      giftPeek: 'wala kang nakita 👀', giftCaught: 'nahuli mo ako 🙈', giftAria: 'May itinatago si Euri. I-tap para makita.',
+      giftTitle: 'Munting regalo para kay Euri? 🧸', giftText: 'Kung gusto mo lang, walang pilitan 💛',
+      giftHow: 'I-screenshot o i-save ang QR, tapos sa GCash, Maya o kahit anong bank app: Scan QR → Upload / Gallery.',
+      giftSave: 'I-save ang QR', giftClose: 'Isara'
     }
   };
   var lang = 'en';
@@ -591,6 +677,7 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
     langBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
     refresh(); tick(); applyDeadline(); updatePager();
     if (lastReply && !done.hidden) showDone(lastReply);
+    gift.relabel();
   }
   langBtns.forEach(function (b) {
     b.addEventListener('click', function () {
@@ -680,6 +767,166 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
   }
   setInterval(tick, 15000);
 
+  // ---------- Gift QR: only after a saved "Sorry, I can't" ----------
+  // Euri floats around holding the QR ("nothing to see here"). A tap stops him and parks it in the
+  // middle, big enough to scan or save. Close, a tap outside, Esc or the phone's Back lets him float again.
+  var gift = (function () {
+    var el = document.getElementById('gift');
+    var shade = document.getElementById('giftShade');
+    var panel = document.getElementById('giftPanel');
+    var bubble = document.getElementById('giftBubble');
+    var title = document.getElementById('giftTitle');
+    var saveBtn = document.getElementById('giftSave');
+    var closeBtn = document.getElementById('giftClose');
+    var spot = document.getElementById('giftSpot');
+    var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var W = 320, H = 548, SPEED = 34;   // layout size (= opened size) and drift speed in px per second
+    var KC = 0.34;                      // size when standing still in the reply box (animations off)
+    var on = false, open = false, busy = false, x = 0, y = 0, vx = 0, vy = 0, last = 0, raf = 0;
+    var file = null, back = null, closeTimer = 0;
+    function k0() { return calm ? KC : innerWidth >= 760 ? 0.52 : innerWidth < 360 ? 0.34 : 0.4; }   // floating size
+    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+    function put(px, py, r, k) {     // position, tilt around the middle, size
+      var cx = W * k / 2, cy = H * k / 2;
+      el.style.transform = 'translate(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px) translate(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) +
+        'px) rotate(' + r.toFixed(2) + 'deg) translate(' + (-cx).toFixed(1) + 'px,' + (-cy).toFixed(1) + 'px) scale(' + k.toFixed(4) + ')';
+    }
+    function home() {   // animations off: no floating; he stands still in the reply box, scrolling with it
+      if (!on || open || busy) return;
+      var r = spot.getBoundingClientRect();
+      el.hidden = !r.width;   // only while the reply box is on screen
+      if (!r.width) return;
+      x = r.left; y = r.top;
+      put(x, y, 0, KC);
+    }
+    function frame(t) {
+      raf = requestAnimationFrame(frame);
+      var dt = Math.min(0.05, (t - (last || t)) / 1000); last = t;
+      if (!on || open || busy) return;
+      var k = k0(), w = W * k, h = H * k;
+      x += vx * dt; y += vy * dt;
+      // bounce off the screen edges (he walks in from outside, so only turn when heading further out)
+      if (x < 6 && vx < 0) vx = SPEED;
+      if (x + w > innerWidth - 6 && vx > 0) vx = -SPEED;
+      if (y < 6 && vy < 0) vy = SPEED * 0.75;
+      if (y + h > innerHeight - 6 && vy > 0) vy = -SPEED * 0.75;
+      put(x, y + 5 * Math.sin(t / 420), 5 * Math.sin(t / 900), k);
+    }
+    function place() {   // opened: as big as fits (up to 1.2x on roomy screens), the words underneath
+      var ph = panel.offsetHeight, gap = 14;
+      var k = Math.min(1.2, (innerWidth - 24) / W, (innerHeight - ph - gap - 28) / H);
+      var top = Math.max(12, (innerHeight - (H * k + gap + ph)) / 2);
+      panel.style.top = (top + H * k + gap) + 'px';
+      put((innerWidth - W * k) / 2, top, 0, k);
+    }
+    function texts() {
+      bubble.textContent = t(open ? 'giftCaught' : 'giftPeek');
+      el.setAttribute('aria-label', t('giftAria'));
+    }
+    function relabel() { texts(); if (open) { el.style.transition = 'none'; place(); } }
+    function prefetch() {   // ready before the tap, so the iPhone share sheet ("Save Image") opens right away
+      if (file || !window.fetch || !window.File) return;
+      fetch('euri-gift-qr.png').then(function (r) { return r.blob(); }).then(function (b) {
+        file = new File([b], 'Euri-gift-QR.png', { type: 'image/png' });
+      }).catch(function () {});
+    }
+    function doOpen() {
+      if (!on || open) return;
+      clearTimeout(closeTimer);
+      open = true; busy = false; back = document.activeElement;
+      var st = history.state || {};
+      try { history.pushState({ step: st.step, pushed: st.pushed, gift: true }, '', location.href); } catch (e) {}
+      texts();
+      shade.hidden = false; panel.hidden = false;
+      el.classList.add('open');
+      document.documentElement.classList.add('gift-lock');
+      el.style.transition = calm ? 'none' : 'transform .55s cubic-bezier(.2, .9, .25, 1)';
+      place();
+      requestAnimationFrame(function () { shade.classList.add('on'); panel.classList.add('on'); });
+      setTimeout(function () { try { title.focus({ preventScroll: true }); } catch (e) {} }, calm ? 0 : 300);
+      prefetch();
+    }
+    function doClose(fromHistory) {
+      if (!open) return;
+      if (!fromHistory && history.state && history.state.gift) {
+        history.back();   // the popstate that follows closes it, so Back and Close behave the same
+        setTimeout(function () { if (open) doClose(true); }, 400);
+        return;
+      }
+      open = false; busy = true;
+      texts();
+      shade.classList.remove('on'); panel.classList.remove('on');
+      document.documentElement.classList.remove('gift-lock');
+      if (calm) { busy = false; home(); }
+      else {
+        var k = k0(), tt = performance.now() + 520;
+        x = clamp(x, 6, innerWidth - W * k - 6); y = clamp(y, 6, innerHeight - H * k - 6);
+        el.style.transition = 'transform .5s cubic-bezier(.3, .7, .3, 1)';
+        put(x, y + 5 * Math.sin(tt / 420), 5 * Math.sin(tt / 900), k);   // land where the drift picks up
+      }
+      closeTimer = setTimeout(function () {
+        el.style.transition = 'none'; el.classList.remove('open');
+        shade.hidden = true; panel.hidden = true; busy = false;
+      }, calm ? 0 : 520);
+      if (back && back.focus && document.contains(back)) { try { back.focus({ preventScroll: true }); } catch (e) {} }
+    }
+    function show(v) {
+      v = !!v;
+      if (v === on) return;
+      on = v;
+      spot.hidden = !(on && calm);
+      if (on) {
+        el.hidden = false; texts();
+        el.style.transition = 'none';
+        if (calm) home();
+        else {
+          x = innerWidth + 10; y = innerHeight * 0.38; vx = -SPEED; vy = -SPEED * 0.75;   // walks in from the right
+          put(x, y, 0, k0());
+          if (!raf) raf = requestAnimationFrame(frame);
+        }
+      } else {
+        if (open) {
+          open = false;
+          shade.classList.remove('on'); panel.classList.remove('on'); shade.hidden = true; panel.hidden = true;
+          el.classList.remove('open'); document.documentElement.classList.remove('gift-lock');
+        }
+        el.hidden = true;
+      }
+    }
+    el.addEventListener('click', function () { if (!open) doOpen(); });
+    el.addEventListener('keydown', function (e) {
+      if (!open && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); doOpen(); }
+    });
+    shade.addEventListener('click', function () { doClose(); });
+    closeBtn.addEventListener('click', function () { doClose(); });
+    document.addEventListener('keydown', function (e) {
+      if (!open) return;
+      if (e.key === 'Escape') { e.preventDefault(); doClose(); }
+      else if (e.key === 'Tab') {   // keep keyboard focus on Save / Close while it is open
+        var f = [saveBtn, closeBtn], i = f.indexOf(document.activeElement);
+        e.preventDefault();
+        f[(i + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+      }
+    });
+    window.addEventListener('resize', function () {
+      if (!on) return;
+      if (open) { el.style.transition = 'none'; place(); }
+      else if (calm) home();
+    });
+    window.addEventListener('scroll', function () { if (calm) home(); }, { passive: true });
+    var ua = navigator.userAgent || '';
+    var iphone = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    saveBtn.addEventListener('click', function (e) {
+      // iPhone: the share sheet's "Save Image" puts it in Photos, where bank apps look. Others download it.
+      if (iphone && file && navigator.canShare && navigator.canShare({ files: [file] })) {
+        e.preventDefault();
+        navigator.share({ files: [file] }).catch(function () {});
+      }
+    });
+    return { show: show, relabel: relabel, close: doClose, isOpen: function () { return open; },
+             sync: function () { if (calm) home(); } };   // after the page changes (section, reply box)
+  })();
+
   // RSVP
   var form = document.getElementById('rsvpForm');
   var nameEl = document.getElementById('guestName');
@@ -731,6 +978,8 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
     document.getElementById('calMaybe').hidden = r.status !== 'maybe' || Date.now() > REMIND_AT;
     form.hidden = true;
     done.hidden = false;
+    gift.show(r.status === 'not_going');
+    gift.sync();
   }
   function remember(r) { try { localStorage.setItem('euri-rsvp', JSON.stringify(r)); } catch (e) {} }
   try {
@@ -765,6 +1014,7 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
     done.hidden = true;
     form.hidden = false;
     setStatus('');
+    gift.sync();
     nameEl.focus();
   });
 
@@ -903,6 +1153,7 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
     window.scrollTo(0, 0);
     if (i === 0) { fitName(); playIdle(); }
     if (moveFocus) { var h = document.getElementById(FOCUS[i]); if (h) h.focus({ preventScroll: true }); }
+    gift.sync();
   }
   function goNext() {
     if (cur >= LAST) return;
@@ -921,12 +1172,13 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
   nextBtn.addEventListener('click', goNext);
   prevBtn.addEventListener('click', goBack);
   window.addEventListener('popstate', function (e) {
+    if (gift.isOpen()) gift.close(true);   // Back closes the gift QR first
     var i = e.state && typeof e.state.step === 'number' ? e.state.step : stepFromHash();
     show(i, i < cur ? -1 : 1, true);
   });
   // Arrow keys (not while typing or choosing an answer).
   document.addEventListener('keydown', function (e) {
-    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || gift.isOpen()) return;
     var tag = (e.target.tagName || '').toLowerCase();
     if (tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable) return;
     if (e.key === 'ArrowRight') goNext(); else if (e.key === 'ArrowLeft') goBack();
@@ -934,8 +1186,8 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
   // Swipe left / right on phones: only a clear sideways swipe, never while typing.
   var sx = 0, sy = 0, swiping = false;
   document.addEventListener('touchstart', function (e) {
-    var inField = e.target.closest && e.target.closest('input, textarea, select, .stk');
-    swiping = e.touches.length === 1 && !inField;
+    var inField = e.target.closest && e.target.closest('input, textarea, select, .stk, .gift, .gift-panel, .gift-shade');
+    swiping = e.touches.length === 1 && !inField && !gift.isOpen();
     if (swiping) { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }
   }, { passive: true });
   document.addEventListener('touchend', function (e) {
