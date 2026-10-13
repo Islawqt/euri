@@ -324,7 +324,7 @@ footer b { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem
 .gift-acts .btn.honey { min-height: 50px; font-size: 1rem; box-shadow: 0 4px 0 var(--honey-dark); }
 html.gift-lock, html.gift-lock body { overflow: hidden; }
 /* with animations turned off, Euri doesn't float: he stands still in this spot in the reply box */
-.gift-spot { justify-self: center; width: 109px; height: 187px; margin: .4rem 0 .2rem; }
+.gift-spot { justify-self: center; width: 131px; height: 225px; margin: .4rem 0 .2rem; }
 @media (prefers-reduced-motion: reduce) {
   .screen.from-right, .screen.from-left, .pg-btn.fwd.nudge svg { animation: none; }
   .dots span, .art .hint, .art video.over, .gift-shade, .gift-panel { transition: none; }
@@ -781,10 +781,10 @@ html.gift-lock, html.gift-lock body { overflow: hidden; }
     var spot = document.getElementById('giftSpot');
     var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var W = 320, H = 548, SPEED = 34;   // layout size (= opened size) and drift speed in px per second
-    var KC = 0.34;                      // size when standing still in the reply box (animations off)
+    var KC = 0.41;                      // size when standing still in the reply box (animations off)
     var on = false, open = false, busy = false, x = 0, y = 0, vx = 0, vy = 0, last = 0, raf = 0;
     var file = null, back = null, closeTimer = 0;
-    function k0() { return calm ? KC : innerWidth >= 760 ? 0.52 : innerWidth < 360 ? 0.34 : 0.4; }   // floating size
+    function k0() { return calm ? KC : innerWidth >= 760 ? 0.62 : innerWidth < 360 ? 0.41 : 0.48; }   // floating size
     function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
     function put(px, py, r, k) {     // position, tilt around the middle, size
       var cx = W * k / 2, cy = H * k / 2;
